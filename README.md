@@ -4,7 +4,7 @@ A JavaScript Math Library for graphics. Most other libraries dont always contain
 ## Usage
 To use, install with npm and use some packaging library (eg. webpack or gulp).
 ```
-npm install @theicecreambear/joml
+npm install joml
 ```
 
 ## Contributing

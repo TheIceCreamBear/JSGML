@@ -1,8 +1,8 @@
 {
-  "name": "@theicecreambear/jsgml",
+  "name": "jsgml",
   "version": "0.1.0",
   "description": "A JavaScript Graphics Math Library",
-  "author": "Joseph Terribile (TheIceCreamBear)",
+  "author": "TheIceCreamBear",
   "license": "ISC",
   "type": "module",
   "scripts": {

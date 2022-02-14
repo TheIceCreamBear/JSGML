@@ -5,6 +5,11 @@
   "author": "TheIceCreamBear",
   "license": "ISC",
   "type": "module",
+  "exports": "./index.js",
+  "files":[
+    "/vec",
+    "index.js"
+  ],
   "scripts": {
     "lint": "eslint .",
     "format": "prettier --write ."

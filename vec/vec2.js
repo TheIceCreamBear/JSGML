@@ -1,4 +1,4 @@
-import Vector3 from './vec3';
+import Vector3 from './vec3.js';
 
 class Vector2 {
   /**

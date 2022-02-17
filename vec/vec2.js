@@ -211,6 +211,46 @@ class Vector2 {
   }
 
   /**
+   * Multiplies the given matrix by this vector, and store the result in this, or dest if present
+   * @param {Matrix2} mat2 the matrix to multiply this vector by
+   * @param {Vector2} dest optional vector to store the results in
+   * @returns {Vector2} this, or if dest is present, dest
+   */
+  mulMat(mat2, dest) {
+    if (!dest) {
+      dest = this;
+    }
+
+    const rx = mat2.m00 * this.x + mat2.m10 * this.y;
+    const ry = mat2.m01 * this.x + mat2.m11 * this.y;
+
+    dest.x = rx;
+    dest.y = ry;
+
+    return dest;
+  }
+
+  /**
+   * Multiplies the transpose of the given matrix by this vector, and store the result in this, or dest if present
+   * @param {Matrix2} mat2 the matrix to multiply this vector by
+   * @param {Vector2} dest optional vector to store the results in
+   * @returns {Vector2} this, or if dest is present, dest
+   */
+  mulMatTranspose(mat2, dest) {
+    if (!dest) {
+      dest = this;
+    }
+
+    const rx = mat2.m00 * this.x + mat2.m01 * this.y;
+    const ry = mat2.m10 * this.x + mat2.m11 * this.y;
+
+    dest.x = rx;
+    dest.y = ry;
+
+    return dest;
+  }
+
+  /**
    * Divides this vector's components by the given components
    * @param {number} x the x value to divide this vector's x component by
    * @param {number} y the y value to divide this vector's y component by
@@ -517,6 +557,6 @@ class Vector2 {
   }
 }
 
-// TODO: matrix multiplications, equals function, FMA
+// TODO: FMA
 
 export default Vector2;

@@ -649,6 +649,6 @@ class Vector4 {
   }
 }
 
-// TODO: matrix multiplications, equals function, FMA, orthogonalize?, half?, reflect, angle
+// TODO: matrix multiplications, FMA, orthogonalize?, half?, reflect, angle
 
 export default Vector4;

@@ -613,6 +613,6 @@ class Vector3 {
   }
 }
 
-// TODO: matrix multiplications, equals function, FMA, orthogonalize?, half?, reflect, angle
+// TODO: matrix multiplications, FMA, orthogonalize?, half?, reflect, angle
 
 export default Vector3;

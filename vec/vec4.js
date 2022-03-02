@@ -292,7 +292,7 @@ class Vector4 {
   /**
    * Multiplies this vector's components by the given vector's components
    * @param {Vector4} vec4 the vector who's components will multiply this vectors components
-   * @param {Vector4} dest Option destination vector
+   * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} this, or if dest is present, dest
    */
   mulVec(vec4, dest) {
@@ -337,7 +337,7 @@ class Vector4 {
   /**
    * Divides this vector's components by the given vector's components
    * @param {Vector4} vec4 the vector who's components will divide this vectors components
-   * @param {Vector4} dest Option destination vector
+   * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} this, or if dest is present, dest
    */
   divVec(vec4, dest) {
@@ -505,7 +505,7 @@ class Vector4 {
   /**
    * Calculates and returns the min components between this and the passed in vector. Optionally stores the result in dest
    * @param {Vector4} vec4 the other vector to find the min component of
-   * @param {Vector4} dest Option destination vector
+   * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} stores the min components between this and vec4 and stores in this, or if dest is present, dest
    */
   min(vec4, dest) {
@@ -532,7 +532,7 @@ class Vector4 {
   /**
    * Calculates and returns the max components between this and the passed in vector. Optionally stores the result in dest
    * @param {Vector4} vec4 the other vector to find the max component of
-   * @param {Vector4} dest Option destination vector
+   * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} stores the max components between this and vec4 and stores in this, or if dest is present, dest
    */
   max(vec4, dest) {
@@ -558,7 +558,7 @@ class Vector4 {
 
   /**
    * Rounds the components of this vector to their floor, and stores it in dest if dest is present
-   * @param {Vector4} dest Option destination vector
+   * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} this, or if dest is present, dest
    */
   floor(dest) {
@@ -579,7 +579,7 @@ class Vector4 {
 
   /**
    * Rounds the components of this vector to their ceiling, and stores it in dest if dest is present
-   * @param {Vector4} dest Option destination vector
+   * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} this, or if dest is present, dest
    */
   ceil(dest) {
@@ -600,7 +600,7 @@ class Vector4 {
 
   /**
    * Rounds the components of this vector, and stores it in dest if dest is present
-   * @param {Vector4} dest Option destination vector
+   * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} this, or if dest is present, dest
    */
   round(dest) {
@@ -621,7 +621,7 @@ class Vector4 {
 
   /**
    * Calculates the absolute value of the components of this vector, and stores it in dest if dest is present
-   * @param {Vector4} dest Option destination vector
+   * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} this, or if dest is present, dest
    */
   abs(dest) {

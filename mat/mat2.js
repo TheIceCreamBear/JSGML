@@ -13,7 +13,7 @@ class Matrix2 {
    *    If it is an Array, the elements of the matrix are filled in with the elements of the array, with the order being m00, m01, m10, and m11
    *    If it is a Matrix2, the elements of that matrix are copied to this matrix.
    *    If it is a Matrix3, the upper left corner of that matrix will be copied to this matrix.
-   * If two arguments are passed in, m00 is a Vector2 with x being this.m00 and y being this.m01, and m01 is also a Vector2 with x being this.m10 and y being this.m11
+   * If two arguments are passed in, m00 is a Vector2 with x being m00 and y being m01, and m01 is also a Vector2 with x being this.m10 and y being this.m11
    * @param {number | Array | Matrix2 | Vector2} m00 the element in the 0th col and 0th row
    * @param {number | Vector2} m01 the the element in the 0th col and 1st row
    * @param {number} m10 the element in the 1st col and 0th row
@@ -63,6 +63,8 @@ class Matrix2 {
         this.m10 = m10;
         this.m11 = m11;
         break;
+      default:
+        throw new Error('Invalid number of arguments');
     }
   }
 
@@ -93,7 +95,7 @@ class Matrix2 {
   }
 
   /**
-   * Constructs a new 2x2 matrix in column major order. Behavior changes based on # of arguments.
+   * Sets the values of this 2x2 matrix in column major order. Behavior changes based on # of arguments.
    * If no arguments are passed in, this matrix is set to an identity. (m00 and m11 are set to 1, with the rest being 0)
    * If one argument is passed in, there are three options:
    *    If it is an Array, the elements of the matrix are filled in with the elements of the array, with the order being m00, m01, m10, and m11
@@ -146,6 +148,8 @@ class Matrix2 {
         this.m10 = m10;
         this.m11 = m11;
         break;
+      default:
+        throw new Error('Invalid number of arguments');
     }
 
     return this;
@@ -186,7 +190,7 @@ class Matrix2 {
     dest.m00 = nm00;
     dest.m01 = nm01;
     dest.m10 = nm10;
-    dest.m11 - nm11;
+    dest.m11 = nm11;
 
     return dest;
   }
@@ -268,7 +272,7 @@ class Matrix2 {
     dest.m00 = nm00;
     dest.m01 = nm01;
     dest.m10 = nm10;
-    dest.m11 - nm11;
+    dest.m11 = nm11;
 
     return dest;
   }

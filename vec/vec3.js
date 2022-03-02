@@ -246,11 +246,55 @@ class Vector3 {
   /**
    * Multiplies this vector's components by the given vector's components
    * @param {Vector3} vec3 the vector who's components will multiply this vectors components
-   * @param {Vector3} dest Option destination vector
+   * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
   mulVec(vec3, dest) {
     return this.mul(vec3.x, vec3.y, vec3.z, dest);
+  }
+
+  /**
+   * Multiplies this vector by the given matrix applying the transform
+   * @param {Matrix} mat3 the matrix to multiply this vector by
+   * @param {Vector3} dest Optional destination vector
+   * @returns {Vector3} this, or if dest is present, dest
+   */
+  mulMat(mat3, dest) {
+    const x = mat3.m00 * this.x + mat3.m10 * this.y + mat3.m20 * this.z;
+    const y = mat3.m01 * this.x + mat3.m11 * this.y + mat3.m21 * this.z;
+    const z = mat3.m02 * this.x + mat3.m12 * this.y + mat3.m22 * this.z;
+
+    if (!dest) {
+      dest = this;
+    }
+
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
+
+    return dest;
+  }
+
+  /**
+   * Multiplies this vector by the transpose of the given matrix applying the transform
+   * @param {Matrix} mat3 the matrix to multiply this vector by
+   * @param {Vector3} dest Optional destination vector
+   * @returns {Vector3} this, or if dest is present, dest
+   */
+  mulMatTranspose(mat3, dest) {
+    const x = mat3.m00 * this.x + mat3.m01 * this.y + mat3.m02 * this.z;
+    const y = mat3.m10 * this.x + mat3.m11 * this.y + mat3.m12 * this.z;
+    const z = mat3.m20 * this.x + mat3.m21 * this.y + mat3.m22 * this.z;
+
+    if (!dest) {
+      dest = this;
+    }
+
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
+
+    return dest;
   }
 
   /**
@@ -288,7 +332,7 @@ class Vector3 {
   /**
    * Divides this vector's components by the given vector's components
    * @param {Vector3} vec3 the vector who's components will divide this vectors components
-   * @param {Vector3} dest Option destination vector
+   * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
   divVec(vec3, dest) {
@@ -483,7 +527,7 @@ class Vector3 {
   /**
    * Calculates and returns the min components between this and the passed in vector. Optionally stores the result in dest
    * @param {Vector3} vec3 the other vector to find the min component of
-   * @param {Vector3} dest Option destination vector
+   * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} stores the min components between this and vec3 and stores in this, or if dest is present, dest
    */
   min(vec3, dest) {
@@ -507,7 +551,7 @@ class Vector3 {
   /**
    * Calculates and returns the max components between this and the passed in vector. Optionally stores the result in dest
    * @param {Vector3} vec3 the other vector to find the max component of
-   * @param {Vector3} dest Option destination vector
+   * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} stores the max components between this and vec3 and stores in this, or if dest is present, dest
    */
   max(vec3, dest) {
@@ -530,7 +574,7 @@ class Vector3 {
 
   /**
    * Rounds the components of this vector to their floor, and stores it in dest if dest is present
-   * @param {Vector3} dest Option destination vector
+   * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
   floor(dest) {
@@ -549,7 +593,7 @@ class Vector3 {
 
   /**
    * Rounds the components of this vector to their ceiling, and stores it in dest if dest is present
-   * @param {Vector3} dest Option destination vector
+   * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
   ceil(dest) {
@@ -568,7 +612,7 @@ class Vector3 {
 
   /**
    * Rounds the components of this vector, and stores it in dest if dest is present
-   * @param {Vector3} dest Option destination vector
+   * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
   round(dest) {
@@ -587,7 +631,7 @@ class Vector3 {
 
   /**
    * Calculates the absolute value of the components of this vector, and stores it in dest if dest is present
-   * @param {Vector3} dest Option destination vector
+   * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
   abs(dest) {

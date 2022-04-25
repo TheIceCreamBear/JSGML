@@ -13,8 +13,8 @@ class Matrix3 {
    * If one argument is passed in, there are NUMBER options:
    *    If it is an Array, the elements of the matrix are filled in with the elements of the array, with the order being m00, m01, m02, m10, m11, m12, m20, m21, m22
    *    If it is a Matrix2, the elements of that matrix are copied to the upper left corner of this matrix.
-   *    If it is a Matrix3, the that matrix will be copied to this matrix.
-   *    If it is a Matrix3, the upper left corner of that matrix will be copied to this matrix.
+   *    If it is a Matrix3, the elements of that matrix are copied to this matrix.
+   *    If it is a Matrix4, the upper left corner of that matrix will be copied to this matrix.
    * If three arguments are passed in, m00 is a Vector3 with x y z being m00 m01 and m02, m01 is a Vector3 with x y z being m10 m11 and m12, m02 is a Vector3 with x y z being m20 m21 and m22
    * @param {number | Array | Matrix2 | Matrix3 | Vector3} m00 the element in the 0th col and 0th row
    * @param {number | Vector3} m01 the the element in the 0th col and 1st row
@@ -23,8 +23,8 @@ class Matrix3 {
    * @param {number} m11 the element in the 1st col and 1st row
    * @param {number} m12 the element in the 1st col and 2nd row
    * @param {number} m20 the element in the 2nd col and 0th row
-   * @param {number} m20 the element in the 2nd col and 1st row
-   * @param {number} m20 the element in the 2nd col and 2nd row
+   * @param {number} m21 the element in the 2nd col and 1st row
+   * @param {number} m22 the element in the 2nd col and 2nd row
    */
   constructor(m00, m01, m02, m10, m11, m12, m20, m21, m22) {
     switch (arguments.length) {

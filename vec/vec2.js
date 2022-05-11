@@ -105,15 +105,13 @@ class Vector2 {
    * @returns {Vector2} this, or if dest is present, dest
    */
   add(x, y, dest) {
-    if (dest) {
-      dest.x = this.x + x;
-      dest.y = this.y + y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x += x;
-    this.y += y;
-    return this;
+    
+    dest.x = this.x + x;
+    dest.y = this.y + y;
+    return dest;
   }
 
   /**
@@ -123,34 +121,30 @@ class Vector2 {
    * @returns {Vector2} this, or if dest is present, dest
    */
   addVec(vec2, dest) {
-    if (dest) {
-      dest.x = this.x + vec2.x;
-      dest.y = this.y + vec2.y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x += vec2.x;
-    this.y += vec2.y;
-    return this;
+    
+    dest.x = this.x + vec2.x;
+    dest.y = this.y + vec2.y;
+    return dest;
   }
 
   /**
-   * Adds the given x and y value to this vector, and stores it in dest if dest is present.
+   * Subtracts the given x and y value to this vector, and stores it in dest if dest is present.
    * @param {number} x the x value to subtract from the value of the current object
    * @param {number} y the y value to subtract from the value of the current object
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
   sub(x, y, dest) {
-    if (dest) {
-      dest.x = this.x - x;
-      dest.y = this.y - y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x -= x;
-    this.y -= y;
-    return this;
+    
+    dest.x = this.x - x;
+    dest.y = this.y - y;
+    return dest;
   }
 
   /**
@@ -160,15 +154,13 @@ class Vector2 {
    * @returns {Vector2} this, or if dest is present, dest
    */
   subVec(vec2, dest) {
-    if (dest) {
-      dest.x = this.x - vec2.x;
-      dest.y = this.y - vec2.y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x -= vec2.x;
-    this.y -= vec2.y;
-    return this;
+    
+    dest.x = this.x - vec2.x;
+    dest.y = this.y - vec2.y;
+    return dest;
   }
 
   /**
@@ -179,15 +171,13 @@ class Vector2 {
    * @returns {Vector2} this, or if dest is present, dest
    */
   mul(x, y, dest) {
-    if (dest) {
-      dest.x = this.x * x;
-      dest.y = this.y * y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x *= x;
-    this.y *= y;
-    return this;
+    
+    dest.x = this.x * x;
+    dest.y = this.y * y;
+    return dest;
   }
 
   /**
@@ -258,15 +248,13 @@ class Vector2 {
    * @returns {Vector2} this, or if dest is present, dest
    */
   div(x, y, dest) {
-    if (dest) {
-      dest.x = this.x / x;
-      dest.y = this.y / y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x /= x;
-    this.y /= y;
-    return this;
+    
+    dest.x = this.x / x;
+    dest.y = this.y / y;
+    return dest;
   }
 
   /**
@@ -379,15 +367,13 @@ class Vector2 {
     const x = this.x * invLen;
     const y = this.y * invLen;
 
-    if (dest) {
-      dest.x = x;
-      dest.y = y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x = x;
-    this.y = y;
-    return this;
+    
+    dest.x = x;
+    dest.y = y;
+    return dest;
   }
 
   /**
@@ -405,15 +391,13 @@ class Vector2 {
    * @returns {Vector2} this, or if dest is present dest
    */
   negate(dest) {
-    if (dest) {
-      dest.x = -this.x;
-      dest.y = -this.y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x = -this.x;
-    this.y = -this.y;
-    return this;
+    
+    dest.x = -this.x;
+    dest.y = -this.y;
+    return dest;
   }
 
   /**
@@ -427,15 +411,13 @@ class Vector2 {
     const x = this.x + (other.x - this.x) * t;
     const y = this.y + (other.y - this.y) * t;
 
-    if (dest) {
-      dest.x = x;
-      dest.y = y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x = x;
-    this.y = y;
-    return this;
+    
+    dest.x = x;
+    dest.y = y;
+    return dest;
   }
 
   /**
@@ -448,15 +430,13 @@ class Vector2 {
     const x = this.x < vec2.x ? this.x : vec2.x;
     const y = this.y < vec2.y ? this.y : vec2.y;
 
-    if (dest) {
-      dest.x = x;
-      dest.y = y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x = x;
-    this.y = y;
-    return this;
+    
+    dest.x = x;
+    dest.y = y;
+    return dest;
   }
 
   /**
@@ -469,15 +449,13 @@ class Vector2 {
     const x = this.x > vec2.x ? this.x : vec2.x;
     const y = this.y > vec2.y ? this.y : vec2.y;
 
-    if (dest) {
-      dest.x = x;
-      dest.y = y;
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x = x;
-    this.y = y;
-    return this;
+    
+    dest.x = x;
+    dest.y = y;
+    return dest;
   }
 
   /**
@@ -486,15 +464,13 @@ class Vector2 {
    * @returns {Vector2} this, or if dest is present, dest
    */
   floor(dest) {
-    if (dest) {
-      dest.x = Math.floor(this.x);
-      dest.y = Math.floor(this.y);
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x = Math.floor(this.x);
-    this.y = Math.floor(this.y);
-    return this;
+    
+    dest.x = Math.floor(this.x);
+    dest.y = Math.floor(this.y);
+    return dest;
   }
 
   /**
@@ -503,15 +479,13 @@ class Vector2 {
    * @returns {Vector2} this, or if dest is present, dest
    */
   ceil(dest) {
-    if (dest) {
-      dest.x = Math.ceil(this.x);
-      dest.y = Math.ceil(this.y);
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x = Math.ceil(this.x);
-    this.y = Math.ceil(this.y);
-    return this;
+    
+    dest.x = Math.ceil(this.x);
+    dest.y = Math.ceil(this.y);
+    return dest;
   }
 
   /**
@@ -520,15 +494,13 @@ class Vector2 {
    * @returns {Vector2} this, or if dest is present, dest
    */
   round(dest) {
-    if (dest) {
-      dest.x = Math.round(this.x);
-      dest.y = Math.round(this.y);
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x = Math.round(this.x);
-    this.y = Math.round(this.y);
-    return this;
+    
+    dest.x = Math.round(this.x);
+    dest.y = Math.round(this.y);
+    return dest;
   }
 
   /**
@@ -537,15 +509,13 @@ class Vector2 {
    * @returns {Vector2} this, or if dest is present, dest
    */
   abs(dest) {
-    if (dest) {
-      dest.x = Math.abs(this.x);
-      dest.y = Math.abs(this.y);
-      return dest;
+    if (!dest) {
+      dest = this;
     }
-
-    this.x = Math.abs(this.x);
-    this.y = Math.abs(this.y);
-    return this;
+    
+    dest.x = Math.abs(this.x);
+    dest.y = Math.abs(this.y);
+    return dest;
   }
 
   /**
@@ -556,7 +526,5 @@ class Vector2 {
     return new Vector2(this.x, this.y);
   }
 }
-
-// TODO: FMA
 
 export default Vector2;

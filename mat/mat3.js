@@ -1,4 +1,4 @@
-import { Vector3, Matrix2 } from '..';
+import { Vector3, Matrix2 } from '../index.js';
 
 /**
  * Column-major 3x3 matrix. Elements are:

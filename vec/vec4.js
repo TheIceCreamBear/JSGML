@@ -7,9 +7,9 @@ class Vector4 {
    * If no arguments are passed in, x, y, z are 0 and w is 1.
    * If one argument is passed in, x, y, z, and w are the value of that argument.
    * If two arguments are passed in, x is treated as a Vector3, and y is the w value, or if x and y are instances of Vector2, x holds the values for x and y, and y holds the values for z and w.
-   * If three arguments are passed in, x is treated as a Vector3, y is z, and z is w.
+   * If three arguments are passed in, x is treated as a Vector2, y is z, and z is w.
    * If four arguments are passed in, x, y, z, and w are their respective value.
-   * @param {number | Vector2 | Vector3} x the x value of the vector, or if this is the only argument present, the x and y value of the vector
+   * @param {number | Vector2 | Vector3} x the x value of the vector, or if this is the only argument present, the x, y, z, and w value of the vector
    * @param {number | Vector2} y the y value of the vector, of if x is a vec2, the z and w value of the vector, or if x is a vec3 the w value
    * @param {number} z the z value of the vector
    * @param {number} w the w value of the vector
@@ -74,7 +74,7 @@ class Vector4 {
    * If two arguments are passed in, x is treated as a Vector3, and y is the w value, or if x and y are instances of Vector2, x holds the values for x and y, and y holds the values for z and w.
    * If three arguments are passed in, x is treated as a Vector3, y is z, and z is w.
    * If four arguments are passed in, x, y, z, and w are their respective value.
-   * @param {number | Vector2 | Vector3 | Vector4} x the x value of the vector, or if this is the only argument present, the x and y value of the vector
+   * @param {number | Vector2 | Vector3 | Vector4} x the x value of the vector, or if this is the only argument present, the x, y, z, and w value of the vector
    * @param {number | Vector2} y the y value of the vector, of if x is a vec2, the z and w value of the vector, or if x is a vec3 the w value
    * @param {number} z the z value of the vector
    * @param {number} w the w value of the vector
@@ -170,20 +170,12 @@ class Vector4 {
    * @param {Vector4} dest optional vector to store the results in
    * @returns {Vector4} this, or if dest is present, dest
    */
-  add(x, y, z, w, dest) {
-    if (dest) {
+  add(x, y, z, w, dest = this) {
       dest.x = this.x + x;
       dest.y = this.y + y;
       dest.z = this.z + z;
       dest.w = this.w + w;
       return dest;
-    }
-
-    this.x += x;
-    this.y += y;
-    this.z += z;
-    this.w += w;
-    return this;
   }
 
   /**
@@ -192,20 +184,12 @@ class Vector4 {
    * @param {Vector4} dest optional vector to store the results in
    * @returns {Vector4} this, or if dest is present, dest
    */
-  addVec(vec4, dest) {
-    if (dest) {
+  addVec(vec4, dest = this) {
       dest.x = this.x + vec4.x;
       dest.y = this.y + vec4.y;
       dest.z = this.z + vec4.z;
       dest.w = this.w + vec4.w;
       return dest;
-    }
-
-    this.x += vec4.x;
-    this.y += vec4.y;
-    this.z += vec4.z;
-    this.w += vec4.w;
-    return this;
   }
 
   /**
@@ -216,20 +200,12 @@ class Vector4 {
    * @param {Vector4} dest optional vector to store the results in
    * @returns {Vector4} this, or if dest is present, dest
    */
-  sub(x, y, z, w, dest) {
-    if (dest) {
+  sub(x, y, z, w, dest = this) {
       dest.x = this.x - x;
       dest.y = this.y - y;
       dest.z = this.z - z;
       dest.w = this.w - w;
       return dest;
-    }
-
-    this.x -= x;
-    this.y -= y;
-    this.z -= z;
-    this.w -= w;
-    return this;
   }
 
   /**
@@ -238,20 +214,12 @@ class Vector4 {
    * @param {Vector4} dest optional vector to store the results in
    * @returns {Vector4} this, or if dest is present, dest
    */
-  subVec(vec4, dest) {
-    if (dest) {
+  subVec(vec4, dest = this) {
       dest.x = this.x - vec4.x;
       dest.y = this.y - vec4.y;
       dest.z = this.z - vec4.z;
       dest.w = this.w - vec4.w;
       return dest;
-    }
-
-    this.x -= vec4.x;
-    this.y -= vec4.y;
-    this.z -= vec4.z;
-    this.w -= vec4.w;
-    return this;
   }
 
   /**
@@ -263,20 +231,12 @@ class Vector4 {
    * @param {Vector4} dest optional vector to store the results in
    * @returns {Vector4} this, or if dest is present, dest
    */
-  mul(x, y, z, w, dest) {
-    if (dest) {
+  mul(x, y, z, w, dest = this) {
       dest.x = this.x * x;
       dest.y = this.y * y;
       dest.z = this.z * z;
       dest.w = this.w * w;
       return dest;
-    }
-
-    this.x *= x;
-    this.y *= y;
-    this.z *= z;
-    this.w *= w;
-    return this;
   }
 
   /**
@@ -308,20 +268,12 @@ class Vector4 {
    * @param {Vector4} dest optional vector to store the results in
    * @returns {Vector4} this, or if dest is present, dest
    */
-  div(x, y, z, w, dest) {
-    if (dest) {
+  div(x, y, z, w, dest = this) {
       dest.x = this.x / x;
       dest.y = this.y / y;
       dest.z = this.z / z;
       dest.w = this.w / w;
       return dest;
-    }
-
-    this.x /= x;
-    this.y /= y;
-    this.z /= z;
-    this.w /= w;
-    return this;
   }
 
   /**
@@ -416,26 +368,18 @@ class Vector4 {
    * @param {Vector4} dest optional vector to store the results in
    * @returns {Vector4} this, or if dest is present, dest
    */
-  normalizeToLen(len, dest) {
+  normalizeToLen(len, dest = this) {
     const invLen = (1 / this.length()) * len;
     const x = this.x * invLen;
     const y = this.y * invLen;
     const z = this.z * invLen;
     const w = this.w * invLen;
 
-    if (dest) {
       dest.x = x;
       dest.y = y;
       dest.z = z;
       dest.w = w;
       return dest;
-    }
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    this.w = w;
-    return this;
   }
 
   /**
@@ -486,20 +430,12 @@ class Vector4 {
    * @param {Vector4} dest optional vector to store the results in
    * @returns {Vector4} this, or if dest is present, dest
    */
-  negate(dest) {
-    if (dest) {
+  negate(dest = this) {
       dest.x = -this.x;
       dest.y = -this.y;
       dest.z = -this.z;
       dest.w = -this.w;
       return dest;
-    }
-
-    this.x = -this.x;
-    this.y = -this.y;
-    this.z = -this.z;
-    this.w = -this.w;
-    return this;
   }
 
   /**
@@ -508,25 +444,17 @@ class Vector4 {
    * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} stores the min components between this and vec4 and stores in this, or if dest is present, dest
    */
-  min(vec4, dest) {
+  min(vec4, dest = this) {
     const x = this.x < vec4.x ? this.x : vec4.x;
     const y = this.y < vec4.y ? this.y : vec4.y;
     const z = this.z < vec4.z ? this.z : vec4.z;
     const w = this.w < vec4.w ? this.w : vec4.w;
 
-    if (dest) {
       dest.x = x;
       dest.y = y;
       dest.z = z;
       dest.w = w;
       return dest;
-    }
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    this.w = w;
-    return this;
   }
 
   /**
@@ -535,25 +463,17 @@ class Vector4 {
    * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} stores the max components between this and vec4 and stores in this, or if dest is present, dest
    */
-  max(vec4, dest) {
+  max(vec4, dest = this) {
     const x = this.x > vec4.x ? this.x : vec4.x;
     const y = this.y > vec4.y ? this.y : vec4.y;
     const z = this.z > vec4.z ? this.z : vec4.z;
     const w = this.w > vec4.w ? this.w : vec4.w;
 
-    if (dest) {
       dest.x = x;
       dest.y = y;
       dest.z = z;
       dest.w = w;
       return dest;
-    }
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    this.w = w;
-    return this;
   }
 
   /**
@@ -561,20 +481,12 @@ class Vector4 {
    * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} this, or if dest is present, dest
    */
-  floor(dest) {
-    if (dest) {
+  floor(dest = this) {
       dest.x = Math.floor(this.x);
       dest.y = Math.floor(this.y);
       dest.z = Math.floor(this.z);
       dest.w = Math.floor(this.w);
       return dest;
-    }
-
-    this.x = Math.floor(this.x);
-    this.y = Math.floor(this.y);
-    this.z = Math.floor(this.z);
-    this.w = Math.floor(this.w);
-    return this;
   }
 
   /**
@@ -582,20 +494,12 @@ class Vector4 {
    * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} this, or if dest is present, dest
    */
-  ceil(dest) {
-    if (dest) {
+  ceil(dest = this) {
       dest.x = Math.ceil(this.x);
       dest.y = Math.ceil(this.y);
       dest.z = Math.ceil(this.z);
       dest.w = Math.ceil(this.w);
       return dest;
-    }
-
-    this.x = Math.ceil(this.x);
-    this.y = Math.ceil(this.y);
-    this.z = Math.ceil(this.z);
-    this.w = Math.ceil(this.w);
-    return this;
   }
 
   /**
@@ -603,20 +507,12 @@ class Vector4 {
    * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} this, or if dest is present, dest
    */
-  round(dest) {
-    if (dest) {
+  round(dest = this) {
       dest.x = Math.round(this.x);
       dest.y = Math.round(this.y);
       dest.z = Math.round(this.z);
       dest.w = Math.round(this.w);
       return dest;
-    }
-
-    this.x = Math.round(this.x);
-    this.y = Math.round(this.y);
-    this.z = Math.round(this.z);
-    this.w = Math.round(this.w);
-    return this;
   }
 
   /**
@@ -624,20 +520,12 @@ class Vector4 {
    * @param {Vector4} dest Optional destination vector
    * @returns {Vector4} this, or if dest is present, dest
    */
-  abs(dest) {
-    if (dest) {
+  abs(dest = this) {
       dest.x = Math.abs(this.x);
       dest.y = Math.abs(this.y);
       dest.z = Math.abs(this.z);
       dest.w = Math.abs(this.w);
       return dest;
-    }
-
-    this.x = Math.abs(this.x);
-    this.y = Math.abs(this.y);
-    this.z = Math.abs(this.z);
-    this.w = Math.abs(this.w);
-    return this;
   }
 
   /**

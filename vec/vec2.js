@@ -1,4 +1,5 @@
 import Vector3 from './vec3.js';
+import Matrix2 from '../mat/mat2.js';
 
 class Vector2 {
   /**
@@ -104,11 +105,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  add(x, y, dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  add(x, y, dest = this) {
     dest.x = this.x + x;
     dest.y = this.y + y;
     return dest;
@@ -120,11 +117,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  addVec(vec2, dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  addVec(vec2, dest = this) {
     dest.x = this.x + vec2.x;
     dest.y = this.y + vec2.y;
     return dest;
@@ -137,11 +130,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  sub(x, y, dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  sub(x, y, dest = this) {
     dest.x = this.x - x;
     dest.y = this.y - y;
     return dest;
@@ -153,11 +142,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  subVec(vec2, dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  subVec(vec2, dest = this) {
     dest.x = this.x - vec2.x;
     dest.y = this.y - vec2.y;
     return dest;
@@ -170,11 +155,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  mul(x, y, dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  mul(x, y, dest = this) {
     dest.x = this.x * x;
     dest.y = this.y * y;
     return dest;
@@ -206,16 +187,12 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  mulMat(mat2, dest) {
-    if (!dest) {
-      dest = this;
-    }
+  mulMat(mat2, dest = this) {
+    const x = mat2.m00 * this.x + mat2.m10 * this.y;
+    const y = mat2.m01 * this.x + mat2.m11 * this.y;
 
-    const rx = mat2.m00 * this.x + mat2.m10 * this.y;
-    const ry = mat2.m01 * this.x + mat2.m11 * this.y;
-
-    dest.x = rx;
-    dest.y = ry;
+    dest.x = x;
+    dest.y = y;
 
     return dest;
   }
@@ -226,16 +203,12 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  mulMatTranspose(mat2, dest) {
-    if (!dest) {
-      dest = this;
-    }
+  mulMatTranspose(mat2, dest = this) {
+    const x = mat2.m00 * this.x + mat2.m01 * this.y;
+    const y = mat2.m10 * this.x + mat2.m11 * this.y;
 
-    const rx = mat2.m00 * this.x + mat2.m01 * this.y;
-    const ry = mat2.m10 * this.x + mat2.m11 * this.y;
-
-    dest.x = rx;
-    dest.y = ry;
+    dest.x = x;
+    dest.y = y;
 
     return dest;
   }
@@ -247,11 +220,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  div(x, y, dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  div(x, y, dest = this) {
     dest.x = this.x / x;
     dest.y = this.y / y;
     return dest;
@@ -362,15 +331,11 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present dest
    */
-  normalizeToLen(len, dest) {
+  normalizeToLen(len, dest = this1) {
     const invLen = (1 / this.length()) * len;
     const x = this.x * invLen;
     const y = this.y * invLen;
 
-    if (!dest) {
-      dest = this;
-    }
-    
     dest.x = x;
     dest.y = y;
     return dest;
@@ -390,11 +355,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present dest
    */
-  negate(dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  negate(dest = this) {
     dest.x = -this.x;
     dest.y = -this.y;
     return dest;
@@ -407,14 +368,10 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} the resultant vector, stored in this, or if dest is present, dest
    */
-  lerp(other, t, dest) {
+  lerp(other, t, dest = this) {
     const x = this.x + (other.x - this.x) * t;
     const y = this.y + (other.y - this.y) * t;
 
-    if (!dest) {
-      dest = this;
-    }
-    
     dest.x = x;
     dest.y = y;
     return dest;
@@ -426,14 +383,10 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} stores the min components between this and vec2 and stores in this, or if dest is present, dest
    */
-  min(vec2, dest) {
+  min(vec2, dest = this) {
     const x = this.x < vec2.x ? this.x : vec2.x;
     const y = this.y < vec2.y ? this.y : vec2.y;
 
-    if (!dest) {
-      dest = this;
-    }
-    
     dest.x = x;
     dest.y = y;
     return dest;
@@ -445,14 +398,10 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} stores the max components between this and vec2 and stores in this, or if dest is present, dest
    */
-  max(vec2, dest) {
+  max(vec2, dest = this) {
     const x = this.x > vec2.x ? this.x : vec2.x;
     const y = this.y > vec2.y ? this.y : vec2.y;
 
-    if (!dest) {
-      dest = this;
-    }
-    
     dest.x = x;
     dest.y = y;
     return dest;
@@ -463,11 +412,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  floor(dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  floor(dest = this) {
     dest.x = Math.floor(this.x);
     dest.y = Math.floor(this.y);
     return dest;
@@ -478,11 +423,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  ceil(dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  ceil(dest = this) {
     dest.x = Math.ceil(this.x);
     dest.y = Math.ceil(this.y);
     return dest;
@@ -493,11 +434,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  round(dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  round(dest = this) {
     dest.x = Math.round(this.x);
     dest.y = Math.round(this.y);
     return dest;
@@ -508,11 +445,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
    */
-  abs(dest) {
-    if (!dest) {
-      dest = this;
-    }
-    
+  abs(dest = this) {
     dest.x = Math.abs(this.x);
     dest.y = Math.abs(this.y);
     return dest;

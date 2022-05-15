@@ -1,15 +1,16 @@
 import Vector2 from './vec2.js';
 import Vector4 from './vec4.js';
+import Matrix3 from '../mat/mat3.js';
 
 class Vector3 {
   /**
    * Constructs a new vector with the given arguments.
-   * If no arguments are passed in, x and y are 0.
+   * If no arguments are passed in, x, y, and z are 0.
    * If one argument is passed in, x, y, and z are the value of that argument.
-   * If two arguments are passed in, x is treated as a Vector2, and y is the z value
+   * If two arguments are passed in, x is treated as a Vector2, and y is the new z value
    * If three arguments are passed in, x, y, and z are their respective values
-   * @param {number | Vector2} x the x value of the vector, or if this is the only argument present, the x and y value of the vector
-   * @param {number} y the y value of the vector, of if x is a vec2, the z value of the vector
+   * @param {number | Vector2} x the x value of the vector, or if this is the only argument present, the x, y, and z value of the vector
+   * @param {number} y the y value of the vector, of if x is a Vector2, the z value of the vector
    * @param {number} z the z value of the vector
    */
   constructor(x, y, z) {
@@ -49,7 +50,7 @@ class Vector3 {
    * If one argument is passed in, x, y, and z are the value of that argument, or it is treated as a Vector3.
    * If two arguments are passed in, x is treated as a Vector2, and y is the z value.
    * If three arguments are passed in, x, y, and z are their respective values.
-   * @param {number | Vector2 | Vector3} x the x value of the vector, or if this is the only argument present, the x and y value of the vector
+   * @param {number | Vector2 | Vector3} x the x value of the vector, or if this is the only argument present, the x, y, and z value of the vector
    * @param {number} y the y value of the vector, of if x is a vec2, the z value of the vector
    * @param {number} z the z value of the vector
    * @returns {Vector3} this object with the new values
@@ -135,18 +136,11 @@ class Vector3 {
    * @param {Vector3} dest optional vector to store the results in
    * @returns {Vector3} this, or if dest is present, dest
    */
-  add(x, y, z, dest) {
-    if (dest) {
-      dest.x = this.x + x;
-      dest.y = this.y + y;
-      dest.z = this.z + z;
-      return dest;
-    }
-
-    this.x += x;
-    this.y += y;
-    this.z += z;
-    return this;
+  add(x, y, z, dest = this) {
+    dest.x = this.x + x;
+    dest.y = this.y + y;
+    dest.z = this.z + z;
+    return dest;
   }
 
   /**
@@ -155,60 +149,39 @@ class Vector3 {
    * @param {Vector3} dest optional vector to store the results in
    * @returns {Vector3} this, or if dest is present, dest
    */
-  addVec(vec3, dest) {
-    if (dest) {
-      dest.x = this.x + vec3.x;
-      dest.y = this.y + vec3.y;
-      dest.z = this.z + vec3.z;
-      return dest;
-    }
-
-    this.x += vec3.x;
-    this.y += vec3.y;
-    this.z += vec3.z;
-    return this;
+  addVec(vec3, dest = this) {
+    dest.x = this.x + vec3.x;
+    dest.y = this.y + vec3.y;
+    dest.z = this.z + vec3.z;
+    return dest;
   }
 
   /**
-   * Adds the given x and y value to this vector, and stores it in dest if dest is present.
+   * Subtracts the given x and y value from this vector, and stores it in dest if dest is present.
    * @param {number} x the x value to subtract from the value of the current object
    * @param {number} y the y value to subtract from the value of the current object
    * @param {number} z the z value to subtract from the value of the current object
    * @param {Vector3} dest optional vector to store the results in
    * @returns {Vector3} this, or if dest is present, dest
    */
-  sub(x, y, z, dest) {
-    if (dest) {
-      dest.x = this.x - x;
-      dest.y = this.y - y;
-      dest.z = this.z - z;
-      return dest;
-    }
-
-    this.x -= x;
-    this.y -= y;
-    this.z -= z;
-    return this;
+  sub(x, y, z, dest = this) {
+    dest.x = this.x - x;
+    dest.y = this.y - y;
+    dest.z = this.z - z;
+    return dest;
   }
 
   /**
-   * Subtracts the given vector component values to this vector, and stores it in dest if dest is present.
+   * Subtracts the given vector component values from this vector, and stores it in dest if dest is present.
    * @param {Vector3} vec3 the vector to subtract from the value of the current object
    * @param {Vector3} dest optional vector to store the results in
    * @returns {Vector3} this, or if dest is present, dest
    */
-  subVec(vec3, dest) {
-    if (dest) {
-      dest.x = this.x - vec3.x;
-      dest.y = this.y - vec3.y;
-      dest.z = this.z - vec3.z;
-      return dest;
-    }
-
-    this.x -= vec3.x;
-    this.y -= vec3.y;
-    this.z -= vec3.z;
-    return this;
+  subVec(vec3, dest = this) {
+    dest.x = this.x - vec3.x;
+    dest.y = this.y - vec3.y;
+    dest.z = this.z - vec3.z;
+    return dest;
   }
 
   /**
@@ -219,18 +192,11 @@ class Vector3 {
    * @param {Vector3} dest optional vector to store the results in
    * @returns {Vector3} this, or if dest is present, dest
    */
-  mul(x, y, z, dest) {
-    if (dest) {
-      dest.x = this.x * x;
-      dest.y = this.y * y;
-      dest.z = this.z * z;
-      return dest;
-    }
-
-    this.x *= x;
-    this.y *= y;
-    this.z *= z;
-    return this;
+  mul(x, y, z, dest = this) {
+    dest.x = this.x * x;
+    dest.y = this.y * y;
+    dest.z = this.z * z;
+    return dest;
   }
 
   /**
@@ -255,18 +221,14 @@ class Vector3 {
 
   /**
    * Multiplies this vector by the given matrix applying the transform
-   * @param {Matrix} mat3 the matrix to multiply this vector by
+   * @param {Matrix3} mat3 the matrix to multiply this vector by
    * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
-  mulMat(mat3, dest) {
+  mulMat(mat3, dest = this) {
     const x = mat3.m00 * this.x + mat3.m10 * this.y + mat3.m20 * this.z;
     const y = mat3.m01 * this.x + mat3.m11 * this.y + mat3.m21 * this.z;
     const z = mat3.m02 * this.x + mat3.m12 * this.y + mat3.m22 * this.z;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.x = x;
     dest.y = y;
@@ -277,7 +239,7 @@ class Vector3 {
 
   /**
    * Multiplies this vector by the transpose of the given matrix applying the transform
-   * @param {Matrix} mat3 the matrix to multiply this vector by
+   * @param {Matrix3} mat3 the matrix to multiply this vector by
    * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
@@ -285,10 +247,6 @@ class Vector3 {
     const x = mat3.m00 * this.x + mat3.m01 * this.y + mat3.m02 * this.z;
     const y = mat3.m10 * this.x + mat3.m11 * this.y + mat3.m12 * this.z;
     const z = mat3.m20 * this.x + mat3.m21 * this.y + mat3.m22 * this.z;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.x = x;
     dest.y = y;
@@ -305,18 +263,11 @@ class Vector3 {
    * @param {Vector3} dest optional vector to store the results in
    * @returns {Vector3} this, or if dest is present, dest
    */
-  div(x, y, z, dest) {
-    if (dest) {
-      dest.x = this.x / x;
-      dest.y = this.y / y;
-      dest.z = this.z / z;
-      return dest;
-    }
-
-    this.x /= x;
-    this.y /= y;
-    this.z /= z;
-    return this;
+  div(x, y, z, dest = this) {
+    dest.x = this.x / x;
+    dest.y = this.y / y;
+    dest.z = this.z / z;
+    return dest;
   }
 
   /**
@@ -407,23 +358,16 @@ class Vector3 {
    * @param {Vector3} dest optional vector to store the results in
    * @returns {Vector3} this, or if dest is present, dest
    */
-  normalizeToLen(len, dest) {
+  normalizeToLen(len, dest = this) {
     const invLen = (1 / this.length()) * len;
     const x = this.x * invLen;
     const y = this.y * invLen;
     const z = this.z * invLen;
 
-    if (dest) {
-      dest.x = x;
-      dest.y = y;
-      dest.z = z;
-      return dest;
-    }
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    return this;
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
+    return dest;
   }
 
   /**
@@ -443,22 +387,15 @@ class Vector3 {
    * @param {Vector3} dest optional vector to store the results in
    * @returns {Vector3} the cross produced stored in this, or if dest is present, dest
    */
-  cross(x, y, z, dest) {
-    const rx = this.y * z - this.z * y;
-    const ry = this.z * x - this.x * z;
-    const rz = this.x * y - this.y * x;
+  cross(x, y, z, dest = this) {
+    const x = this.y * z - this.z * y;
+    const y = this.z * x - this.x * z;
+    const z = this.x * y - this.y * x;
 
-    if (dest) {
-      dest.x = rx;
-      dest.y = ry;
-      dest.z = rz;
-      return dest;
-    }
-
-    this.x = rx;
-    this.y = ry;
-    this.z = rz;
-    return this;
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
+    return dest;
   }
 
   /**
@@ -487,22 +424,15 @@ class Vector3 {
    * @param {Vector3} dest optional vector to store the results in
    * @returns the resultant vector, stored in this, or if dest is present, dest
    */
-  lerp(other, t, dest) {
+  lerp(other, t, dest = this) {
     const x = this.x + (other.x - this.x) * t;
     const y = this.y + (other.y - this.y) * t;
     const z = this.z + (other.z - this.z) * t;
 
-    if (dest) {
-      dest.x = x;
-      dest.y = y;
-      dest.z = z;
-      return dest;
-    }
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    return this;
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
+    return dest;
   }
 
   /**
@@ -510,18 +440,11 @@ class Vector3 {
    * @param {Vector3} dest optional vector to store the results in
    * @returns {Vector3} this, or if dest is present, dest
    */
-  negate(dest) {
-    if (dest) {
-      dest.x = -this.x;
-      dest.y = -this.y;
-      dest.z = -this.z;
-      return dest;
-    }
-
-    this.x = -this.x;
-    this.y = -this.y;
-    this.z = -this.z;
-    return this;
+  negate(dest = this) {
+    dest.x = -this.x;
+    dest.y = -this.y;
+    dest.z = -this.z;
+    return dest;
   }
 
   /**
@@ -530,22 +453,15 @@ class Vector3 {
    * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} stores the min components between this and vec3 and stores in this, or if dest is present, dest
    */
-  min(vec3, dest) {
+  min(vec3, dest = this) {
     const x = this.x < vec3.x ? this.x : vec3.x;
     const y = this.y < vec3.y ? this.y : vec3.y;
     const z = this.z < vec3.z ? this.z : vec3.z;
 
-    if (dest) {
-      dest.x = x;
-      dest.y = y;
-      dest.z = z;
-      return dest;
-    }
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    return this;
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
+    return dest;
   }
 
   /**
@@ -554,22 +470,15 @@ class Vector3 {
    * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} stores the max components between this and vec3 and stores in this, or if dest is present, dest
    */
-  max(vec3, dest) {
+  max(vec3, dest = this) {
     const x = this.x > vec3.x ? this.x : vec3.x;
     const y = this.y > vec3.y ? this.y : vec3.y;
     const z = this.z > vec3.z ? this.z : vec3.z;
 
-    if (dest) {
-      dest.x = x;
-      dest.y = y;
-      dest.z = z;
-      return dest;
-    }
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    return this;
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
+    return dest;
   }
 
   /**
@@ -577,18 +486,11 @@ class Vector3 {
    * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
-  floor(dest) {
-    if (dest) {
-      dest.x = Math.floor(this.x);
-      dest.y = Math.floor(this.y);
-      dest.z = Math.floor(this.z);
-      return dest;
-    }
-
-    this.x = Math.floor(this.x);
-    this.y = Math.floor(this.y);
-    this.z = Math.floor(this.z);
-    return this;
+  floor(dest = this) {
+    dest.x = Math.floor(this.x);
+    dest.y = Math.floor(this.y);
+    dest.z = Math.floor(this.z);
+    return dest;
   }
 
   /**
@@ -596,18 +498,11 @@ class Vector3 {
    * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
-  ceil(dest) {
-    if (dest) {
-      dest.x = Math.ceil(this.x);
-      dest.y = Math.ceil(this.y);
-      dest.z = Math.ceil(this.z);
-      return dest;
-    }
-
-    this.x = Math.ceil(this.x);
-    this.y = Math.ceil(this.y);
-    this.z = Math.ceil(this.z);
-    return this;
+  ceil(dest = this) {
+    dest.x = Math.ceil(this.x);
+    dest.y = Math.ceil(this.y);
+    dest.z = Math.ceil(this.z);
+    return dest;
   }
 
   /**
@@ -615,18 +510,11 @@ class Vector3 {
    * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
-  round(dest) {
-    if (dest) {
-      dest.x = Math.round(this.x);
-      dest.y = Math.round(this.y);
-      dest.z = Math.round(this.z);
-      return dest;
-    }
-
-    this.x = Math.round(this.x);
-    this.y = Math.round(this.y);
-    this.z = Math.round(this.z);
-    return this;
+  round(dest = this) {
+    dest.x = Math.round(this.x);
+    dest.y = Math.round(this.y);
+    dest.z = Math.round(this.z);
+    return dest;
   }
 
   /**
@@ -634,18 +522,11 @@ class Vector3 {
    * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
-  abs(dest) {
-    if (dest) {
-      dest.x = Math.abs(this.x);
-      dest.y = Math.abs(this.y);
-      dest.z = Math.abs(this.z);
-      return dest;
-    }
-
-    this.x = Math.abs(this.x);
-    this.y = Math.abs(this.y);
-    this.z = Math.abs(this.z);
-    return this;
+  abs(dest = this) {
+    dest.x = Math.abs(this.x);
+    dest.y = Math.abs(this.y);
+    dest.z = Math.abs(this.z);
+    return dest;
   }
 
   /**
@@ -657,6 +538,6 @@ class Vector3 {
   }
 }
 
-// TODO: matrix multiplications, FMA, orthogonalize?, half?, reflect, angle
+// TODO: FMA, orthogonalize?, half?, reflect, angle
 
 export default Vector3;

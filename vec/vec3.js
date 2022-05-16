@@ -45,7 +45,7 @@ class Vector3 {
   }
 
   /**
-   * Sets this vector's components to be the given arguments. 
+   * Sets this vector's components to be the given arguments.
    * If no arguments are passed in, x, y, and z are 0.
    * If one argument is passed in, x, y, and z are the value of that argument, or it is treated as a Vector3.
    * If two arguments are passed in, x is treated as a Vector2, and y is the z value.
@@ -71,7 +71,7 @@ class Vector3 {
         break;
       // only x and y are present
       case 2:
-        if (!(x instanceof Vector2 && (typeof y) === 'number')) {
+        if (!(x instanceof Vector2 && typeof y === 'number')) {
           throw new Error('Invalid argument types');
         }
         this.x = x.x;

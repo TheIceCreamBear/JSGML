@@ -37,7 +37,7 @@ class Vector4 {
           this.y = x.y;
           this.z = y.x;
           this.w = y.y;
-        } else if (x instanceof Vector3 && (typeof y) === 'number') {
+        } else if (x instanceof Vector3 && typeof y === 'number') {
           this.x = x.x;
           this.y = x.y;
           this.z = x.z;
@@ -48,7 +48,7 @@ class Vector4 {
         break;
       // x y and z are present
       case 3:
-        if (!(x instanceof Vector2 && (typeof y) === 'number' && (typeof z) === 'number')) {
+        if (!(x instanceof Vector2 && typeof y === 'number' && typeof z === 'number')) {
           throw new Error('Invalid argument types');
         }
         this.x = x.x;
@@ -68,7 +68,7 @@ class Vector4 {
   }
 
   /**
-   * Sets this vector's components to be the given arguments. 
+   * Sets this vector's components to be the given arguments.
    * If no arguments are passed in, x, y, z, and w are 0.
    * If one argument is passed in, x, y, z, and w are the value of that argument, or it is treated as a Vector4.
    * If two arguments are passed in, x is treated as a Vector3, and y is the w value, or if x and y are instances of Vector2, x holds the values for x and y, and y holds the values for z and w.
@@ -110,7 +110,7 @@ class Vector4 {
           this.y = x.y;
           this.z = y.x;
           this.w = y.y;
-        } else if (x instanceof Vector3 && (typeof y) === 'number') {
+        } else if (x instanceof Vector3 && typeof y === 'number') {
           this.x = x.x;
           this.y = x.y;
           this.z = x.z;
@@ -121,7 +121,7 @@ class Vector4 {
         break;
       // x y and z are present
       case 3:
-        if (!(x instanceof Vector2 && (typeof y) === 'number' && (typeof z) === 'number')) {
+        if (!(x instanceof Vector2 && typeof y === 'number' && typeof z === 'number')) {
           throw new Error('Invalid argument types');
         }
         this.x = x.x;
@@ -171,11 +171,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   add(x, y, z, w, dest = this) {
-      dest.x = this.x + x;
-      dest.y = this.y + y;
-      dest.z = this.z + z;
-      dest.w = this.w + w;
-      return dest;
+    dest.x = this.x + x;
+    dest.y = this.y + y;
+    dest.z = this.z + z;
+    dest.w = this.w + w;
+    return dest;
   }
 
   /**
@@ -185,11 +185,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   addVec(vec4, dest = this) {
-      dest.x = this.x + vec4.x;
-      dest.y = this.y + vec4.y;
-      dest.z = this.z + vec4.z;
-      dest.w = this.w + vec4.w;
-      return dest;
+    dest.x = this.x + vec4.x;
+    dest.y = this.y + vec4.y;
+    dest.z = this.z + vec4.z;
+    dest.w = this.w + vec4.w;
+    return dest;
   }
 
   /**
@@ -201,11 +201,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   sub(x, y, z, w, dest = this) {
-      dest.x = this.x - x;
-      dest.y = this.y - y;
-      dest.z = this.z - z;
-      dest.w = this.w - w;
-      return dest;
+    dest.x = this.x - x;
+    dest.y = this.y - y;
+    dest.z = this.z - z;
+    dest.w = this.w - w;
+    return dest;
   }
 
   /**
@@ -215,11 +215,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   subVec(vec4, dest = this) {
-      dest.x = this.x - vec4.x;
-      dest.y = this.y - vec4.y;
-      dest.z = this.z - vec4.z;
-      dest.w = this.w - vec4.w;
-      return dest;
+    dest.x = this.x - vec4.x;
+    dest.y = this.y - vec4.y;
+    dest.z = this.z - vec4.z;
+    dest.w = this.w - vec4.w;
+    return dest;
   }
 
   /**
@@ -232,11 +232,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   mul(x, y, z, w, dest = this) {
-      dest.x = this.x * x;
-      dest.y = this.y * y;
-      dest.z = this.z * z;
-      dest.w = this.w * w;
-      return dest;
+    dest.x = this.x * x;
+    dest.y = this.y * y;
+    dest.z = this.z * z;
+    dest.w = this.w * w;
+    return dest;
   }
 
   /**
@@ -269,11 +269,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   div(x, y, z, w, dest = this) {
-      dest.x = this.x / x;
-      dest.y = this.y / y;
-      dest.z = this.z / z;
-      dest.w = this.w / w;
-      return dest;
+    dest.x = this.x / x;
+    dest.y = this.y / y;
+    dest.z = this.z / z;
+    dest.w = this.w / w;
+    return dest;
   }
 
   /**
@@ -375,11 +375,11 @@ class Vector4 {
     const z = this.z * invLen;
     const w = this.w * invLen;
 
-      dest.x = x;
-      dest.y = y;
-      dest.z = z;
-      dest.w = w;
-      return dest;
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
+    dest.w = w;
+    return dest;
   }
 
   /**
@@ -431,11 +431,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   negate(dest = this) {
-      dest.x = -this.x;
-      dest.y = -this.y;
-      dest.z = -this.z;
-      dest.w = -this.w;
-      return dest;
+    dest.x = -this.x;
+    dest.y = -this.y;
+    dest.z = -this.z;
+    dest.w = -this.w;
+    return dest;
   }
 
   /**
@@ -450,11 +450,11 @@ class Vector4 {
     const z = this.z < vec4.z ? this.z : vec4.z;
     const w = this.w < vec4.w ? this.w : vec4.w;
 
-      dest.x = x;
-      dest.y = y;
-      dest.z = z;
-      dest.w = w;
-      return dest;
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
+    dest.w = w;
+    return dest;
   }
 
   /**
@@ -469,11 +469,11 @@ class Vector4 {
     const z = this.z > vec4.z ? this.z : vec4.z;
     const w = this.w > vec4.w ? this.w : vec4.w;
 
-      dest.x = x;
-      dest.y = y;
-      dest.z = z;
-      dest.w = w;
-      return dest;
+    dest.x = x;
+    dest.y = y;
+    dest.z = z;
+    dest.w = w;
+    return dest;
   }
 
   /**
@@ -482,11 +482,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   floor(dest = this) {
-      dest.x = Math.floor(this.x);
-      dest.y = Math.floor(this.y);
-      dest.z = Math.floor(this.z);
-      dest.w = Math.floor(this.w);
-      return dest;
+    dest.x = Math.floor(this.x);
+    dest.y = Math.floor(this.y);
+    dest.z = Math.floor(this.z);
+    dest.w = Math.floor(this.w);
+    return dest;
   }
 
   /**
@@ -495,11 +495,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   ceil(dest = this) {
-      dest.x = Math.ceil(this.x);
-      dest.y = Math.ceil(this.y);
-      dest.z = Math.ceil(this.z);
-      dest.w = Math.ceil(this.w);
-      return dest;
+    dest.x = Math.ceil(this.x);
+    dest.y = Math.ceil(this.y);
+    dest.z = Math.ceil(this.z);
+    dest.w = Math.ceil(this.w);
+    return dest;
   }
 
   /**
@@ -508,11 +508,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   round(dest = this) {
-      dest.x = Math.round(this.x);
-      dest.y = Math.round(this.y);
-      dest.z = Math.round(this.z);
-      dest.w = Math.round(this.w);
-      return dest;
+    dest.x = Math.round(this.x);
+    dest.y = Math.round(this.y);
+    dest.z = Math.round(this.z);
+    dest.w = Math.round(this.w);
+    return dest;
   }
 
   /**
@@ -521,11 +521,11 @@ class Vector4 {
    * @returns {Vector4} this, or if dest is present, dest
    */
   abs(dest = this) {
-      dest.x = Math.abs(this.x);
-      dest.y = Math.abs(this.y);
-      dest.z = Math.abs(this.z);
-      dest.w = Math.abs(this.w);
-      return dest;
+    dest.x = Math.abs(this.x);
+    dest.y = Math.abs(this.y);
+    dest.z = Math.abs(this.z);
+    dest.w = Math.abs(this.w);
+    return dest;
   }
 
   /**

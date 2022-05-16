@@ -4,11 +4,11 @@ A JavaScript Math Library for graphics. Most other libraries dont always contain
 ## Usage
 To use, install with npm and use some packaging library (eg. webpack or gulp).
 ```
-npm install joml
+npm install jsgml
 ```
 
 ## Contributing
 This section is a TODO.
 
 ## License
-This section is a TODO.
+This repository and package is licensed under the MIT license. For more info, see LICENSE.md.

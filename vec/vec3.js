@@ -1,6 +1,5 @@
 import Vector2 from './vec2.js';
 import Vector4 from './vec4.js';
-import Matrix3 from '../mat/mat3.js';
 
 class Vector3 {
   /**
@@ -221,6 +220,7 @@ class Vector3 {
 
   /**
    * Multiplies this vector by the given matrix applying the transform
+   * @typedef {import('../mat/mat3.js').default} Matrix3
    * @param {Matrix3} mat3 the matrix to multiply this vector by
    * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
@@ -239,6 +239,7 @@ class Vector3 {
 
   /**
    * Multiplies this vector by the transpose of the given matrix applying the transform
+   * @typedef {import('../mat/mat3.js').default} Matrix3
    * @param {Matrix3} mat3 the matrix to multiply this vector by
    * @param {Vector3} dest Optional destination vector
    * @returns {Vector3} this, or if dest is present, dest
@@ -388,13 +389,13 @@ class Vector3 {
    * @returns {Vector3} the cross produced stored in this, or if dest is present, dest
    */
   cross(x, y, z, dest = this) {
-    const x = this.y * z - this.z * y;
-    const y = this.z * x - this.x * z;
-    const z = this.x * y - this.y * x;
+    const nx = this.y * z - this.z * y;
+    const ny = this.z * x - this.x * z;
+    const nz = this.x * y - this.y * x;
 
-    dest.x = x;
-    dest.y = y;
-    dest.z = z;
+    dest.x = nx;
+    dest.y = ny;
+    dest.z = nz;
     return dest;
   }
 

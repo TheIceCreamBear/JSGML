@@ -1,5 +1,4 @@
 import Vector3 from './vec3.js';
-import Matrix2 from '../mat/mat2.js';
 
 class Vector2 {
   /**
@@ -183,6 +182,7 @@ class Vector2 {
 
   /**
    * Multiplies the given matrix by this vector, and store the result in this, or dest if present
+   * @typedef {import('../mat/mat2.js').default} Matrix2
    * @param {Matrix2} mat2 the matrix to multiply this vector by
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
@@ -199,6 +199,7 @@ class Vector2 {
 
   /**
    * Multiplies the transpose of the given matrix by this vector, and store the result in this, or dest if present
+   * @typedef {import('../mat/mat2.js').default} Matrix2
    * @param {Matrix2} mat2 the matrix to multiply this vector by
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present, dest
@@ -331,7 +332,7 @@ class Vector2 {
    * @param {Vector2} dest optional vector to store the results in
    * @returns {Vector2} this, or if dest is present dest
    */
-  normalizeToLen(len, dest = this1) {
+  normalizeToLen(len, dest = this) {
     const invLen = (1 / this.length()) * len;
     const x = this.x * invLen;
     const y = this.y * invLen;

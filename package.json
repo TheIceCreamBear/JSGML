@@ -1,12 +1,14 @@
 {
   "name": "jsgml",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A JavaScript Graphics Math Library",
   "author": "Joseph Terribile",
   "license": "MIT",
   "type": "module",
   "exports": "./index.js",
   "files":[
+    "README.md",
+    "LICENSE.md",
     "index.js",
     "/vec",
     "/mat"

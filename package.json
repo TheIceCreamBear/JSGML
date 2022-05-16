@@ -2,13 +2,14 @@
   "name": "jsgml",
   "version": "0.1.0",
   "description": "A JavaScript Graphics Math Library",
-  "author": "TheIceCreamBear",
-  "license": "ISC",
+  "author": "Joseph Terribile",
+  "license": "MIT",
   "type": "module",
   "exports": "./index.js",
   "files":[
+    "index.js",
     "/vec",
-    "index.js"
+    "/mat"
   ],
   "scripts": {
     "lint": "eslint .",

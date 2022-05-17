@@ -297,6 +297,15 @@ class Vector4 {
   }
 
   /**
+   * Calculates the dot product between two vectors, this and the passed in vector
+   * @param {Vector4} vec4 The other vector to calculate the dot on
+   * @returns {number} the dot product between this vector and the passed in vector
+   */
+  dot(vec4) {
+    return this.x * vec4.x + this.y * vec4.y + this.z * vec4.z;
+  }
+
+  /**
    * Calculates and returns the length of this vector pre square root (length squared)
    * @returns {number} the length squared of this vector
    */
@@ -389,15 +398,6 @@ class Vector4 {
    */
   normalize(dest) {
     return this.normalizeToLen(1, dest);
-  }
-
-  /**
-   * Calculates the dot product between two vectors, this and the passed in vector
-   * @param {Vector4} vec4 The other vector to calculate the dot on
-   * @returns {number} the dot product between this vector and the passed in vector
-   */
-  dot(vec4) {
-    return this.x * vec4.x + this.y * vec4.y + this.z * vec4.z;
   }
 
   /**

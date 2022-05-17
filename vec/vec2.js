@@ -352,17 +352,6 @@ class Vector2 {
   }
 
   /**
-   * Negates this vector by individual components, and stores it in dest if present
-   * @param {Vector2} dest optional vector to store the results in
-   * @returns {Vector2} this, or if dest is present dest
-   */
-  negate(dest = this) {
-    dest.x = -this.x;
-    dest.y = -this.y;
-    return dest;
-  }
-
-  /**
    * Calculates the linear interpolation between this and the other vector
    * @param {Vector2} other the other vector to interpolate from
    * @param {number} t the progress (0-1) of the lerp
@@ -375,6 +364,17 @@ class Vector2 {
 
     dest.x = x;
     dest.y = y;
+    return dest;
+  }
+
+  /**
+   * Negates this vector by individual components, and stores it in dest if present
+   * @param {Vector2} dest optional vector to store the results in
+   * @returns {Vector2} this, or if dest is present dest
+   */
+  negate(dest = this) {
+    dest.x = -this.x;
+    dest.y = -this.y;
     return dest;
   }
 

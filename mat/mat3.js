@@ -16,7 +16,7 @@ class Matrix3 {
    *    If it is a Matrix3, the elements of that matrix are copied to this matrix.
    *    If it is a Matrix4, the upper left corner of that matrix will be copied to this matrix.
    * If three arguments are passed in, m00 is a Vector3 with x y z being m00 m01 and m02, m01 is a Vector3 with x y z being m10 m11 and m12, m02 is a Vector3 with x y z being m20 m21 and m22
-   * @param {number | Array | Matrix2 | Matrix3 | Vector3} m00 the element in the 0th col and 0th row
+   * @param {number | Float32Array | Matrix2 | Matrix3 | Vector3} m00 the element in the 0th col and 0th row
    * @param {number | Vector3} m01 the the element in the 0th col and 1st row
    * @param {number | Vector3} m02 the element in the 0th col and 2nd row
    * @param {number} m10 the element in the 1st col and 0th row
@@ -140,7 +140,7 @@ class Matrix3 {
    *    If it is a Matrix3, the that matrix will be copied to this matrix.
    *    If it is a Matrix3, the upper left corner of that matrix will be copied to this matrix.
    * If three arguments are passed in, m00 is a Vector3 with x y z being m00 m01 and m02, m01 is a Vector3 with x y z being m10 m11 and m12, m02 is a Vector3 with x y z being m20 m21 and m22
-   * @param {number | Array | Matrix2 | Matrix3 | Vector3} m00 the element in the 0th col and 0th row
+   * @param {number | Float32Array | Matrix2 | Matrix3 | Vector3} m00 the element in the 0th col and 0th row
    * @param {number | Vector3} m01 the the element in the 0th col and 1st row
    * @param {number | Vector3} m02 the element in the 0th col and 2nd row
    * @param {number} m10 the element in the 1st col and 0th row
@@ -330,7 +330,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  subtract(other, dest) {
+  sub(other, dest) {
     if (!dest) {
       dest = this;
     }
@@ -388,9 +388,9 @@ class Matrix3 {
    * Multiplies the other matrix by this matrix, and stores the result in this, or dest if present
    *
    * If this matrix is T, and the other matrix is O, then the result will be R = O x T
-   * @param {Matrix2} left the matrix to multiply on the left of this
-   * @param {Matrix2} dest optional matrix to store the results in
-   * @returns {Matrix2} this, or if dest is present, dest
+   * @param {Matrix3} left the matrix to multiply on the left of this
+   * @param {Matrix3} dest optional matrix to store the results in
+   * @returns {Matrix3} this, or if dest is present, dest
    */
   mulLeft(left, dest) {
     const nm00 = left.m00 * this.m00 + left.m10 * this.m01 + left.m20 * this.m02;
@@ -422,9 +422,9 @@ class Matrix3 {
 
   /**
    * Multiplies this Matrix's components by the other's components, stores the result in dest if present
-   * @param {Matrix2} other the matrix to multiply on the left of this
-   * @param {Matrix2} dest optional matrix to store the results in
-   * @returns {Matrix2} this, or if dest is present, dest
+   * @param {Matrix3} other the matrix to multiply on the left of this
+   * @param {Matrix3} dest optional matrix to store the results in
+   * @returns {Matrix3} this, or if dest is present, dest
    */
   mulComponentWise(other, dest) {
     if (!dest) {
@@ -518,15 +518,6 @@ class Matrix3 {
   }
 
   /**
-   * Sets this matrix to represent a uniform scaling
-   * @param {number} scalar the value to scale by
-   * @returns {Matrix3} this
-   */
-  scalingUniform(scalar) {
-    return this.scaling(scalar, scalar, scalar);
-  }
-
-  /**
    * Sets this matrix to represent a scaling based on the values in the vec
    * @param {Vector3} vec3 the vector containing the values to scale by
    * @returns {Matrix3} this
@@ -535,12 +526,21 @@ class Matrix3 {
     return this.scaling(vec3.x, vec3.y, vec3.z);
   }
 
+  /**
+   * Sets this matrix to represent a uniform scaling
+   * @param {number} scalar the value to scale by
+   * @returns {Matrix3} this
+   */
+  scalingUniform(scalar) {
+    return this.scaling(scalar, scalar, scalar);
+  }
+
   // TODO: rotates, allowing for axis angles and all the other jazz
 
   /**
    * Transform the given vector by this matrix
    * @param {Vector3} vec the vector to transform
-   * @param {Vector3} dest Optional destination vector
+   * @param {Vector3} dest Required destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
   transform(vec, dest) {
@@ -570,7 +570,7 @@ class Matrix3 {
   /**
    * Transform the given vector by the transpose this matrix
    * @param {Vector3} vec the vector to transform
-   * @param {Vector3} dest Optional destination vector
+   * @param {Vector3} dest Required destination vector
    * @returns {Vector3} this, or if dest is present, dest
    */
   transformTranspose(vec, dest) {
@@ -600,8 +600,8 @@ class Matrix3 {
 
   /**
    * Calculates the normal matrix of this matrix, and stores it in this, or dest if present
-   * @param {Matrix2} dest optional matrix to store the results in
-   * @returns {Matrix2} this, or if dest is present, dest
+   * @param {Matrix3} dest optional matrix to store the results in
+   * @returns {Matrix3} this, or if dest is present, dest
    */
   normal(dest) {
     const scalar = 1 / this.determinate();

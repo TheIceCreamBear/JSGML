@@ -16,7 +16,7 @@ class Matrix4 {
    *    If it is a Matrix3, the that matrix will be copied to the upper left corner of this matrix.
    *    If it is a Matrix4, the elements of that matrix are copied to this matrix.
    * If four arguments are passed in, each argument is a Vector4 representing an individual column
-   * @param {number | Array | Matrix3 | Matrix4 | Vector4} m00 the element in the 0th col and 0th row
+   * @param {number | Float32Array | Matrix3 | Matrix4 | Vector4} m00 the element in the 0th col and 0th row
    * @param {number | Vector4} m01 the the element in the 0th col and 1st row
    * @param {number | Vector4} m02 the element in the 0th col and 2nd row
    * @param {number | Vector4} m03 the element in the 0th col and 3rd row
@@ -186,7 +186,7 @@ class Matrix4 {
    *    If it is a Matrix3, the that matrix will be copied to the upper left corner of this matrix.
    *    If it is a Matrix4, the elements of that matrix are copied to this matrix.
    * If four arguments are passed in, each argument is a Vector4 representing an individual column
-   * @param {number | Array | Matrix3 | Matrix4 | Vector4} m00 the element in the 0th col and 0th row
+   * @param {number | Float32Array | Matrix3 | Matrix4 | Vector4} m00 the element in the 0th col and 0th row
    * @param {number | Vector4} m01 the the element in the 0th col and 1st row
    * @param {number | Vector4} m02 the element in the 0th col and 2nd row
    * @param {number | Vector4} m03 the element in the 0th col and 3rd row

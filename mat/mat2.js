@@ -14,7 +14,7 @@ class Matrix2 {
    *    If it is a Matrix2, the elements of that matrix are copied to this matrix.
    *    If it is a Matrix3, the upper left corner of that matrix will be copied to this matrix.
    * If two arguments are passed in, m00 is a Vector2 with x being m00 and y being m01, and m01 is also a Vector2 with x being this.m10 and y being this.m11
-   * @param {number | Array | Matrix2 | Vector2} m00 the element in the 0th col and 0th row
+   * @param {number | Float32Array | Matrix2 | Vector2} m00 the element in the 0th col and 0th row
    * @param {number | Vector2} m01 the the element in the 0th col and 1st row
    * @param {number} m10 the element in the 1st col and 0th row
    * @param {number} m11 the element in the 1st col and 1st row
@@ -102,7 +102,7 @@ class Matrix2 {
    *    If it is a Matrix2, the elements of that matrix are copied to this matrix.
    *    If it is a Matrix3, the upper left corner of that matrix will be copied to this matrix.
    * If two arguments are passed in, m00 is a Vector2 with x being this.m00 and y being this.m01, and m01 is also a Vector2 with x being this.m10 and y being this.m11
-   * @param {number | Array | Matrix2 | Vector2} m00 the element in the 0th col and 0th row
+   * @param {number | Float32Array | Matrix2 | Vector2} m00 the element in the 0th col and 0th row
    * @param {number | Vector2} m01 the the element in the 0th col and 1st row
    * @param {number} m10 the element in the 1st col and 0th row
    * @param {number} m11 the element in the 1st col and 1st row
@@ -238,7 +238,7 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  subtract(other, dest) {
+  sub(other, dest) {
     if (!dest) {
       dest = this;
     }
@@ -368,6 +368,39 @@ class Matrix2 {
   }
 
   /**
+   * Sets this matrix to represent a scaling matrix with the given values
+   * @param {number} x the x value to scale by
+   * @param {number} y the y value to scale by
+   * @returns {Matrix2} this
+   */
+  scaling(x, y) {
+    this.zero();
+
+    this.m00 = x;
+    this.m11 = y;
+
+    return this;
+  }
+
+  /**
+   * Sets this matrix to represent a scaling based on the values in the vec
+   * @param {Vector2} vec2 the vector containing the values to scale by
+   * @returns {Matrix2} this
+   */
+  scalingVec(vec2) {
+    return this.scaling(vec2.x, vec2.y);
+  }
+
+  /**
+   * Sets this matrix to represent a uniform scaling
+   * @param {number} scalar the value to scale by
+   * @returns {Matrix2} this
+   */
+  scalingUniform(scalar) {
+    return this.scaling(scalar, scalar);
+  }
+
+  /**
    * Rotates this matrix about the origin by the given angle
    * @param {number} angle the angle to rotate, defined in radians
    * @param {Matrix2} dest optional matrix to store the results in
@@ -437,39 +470,6 @@ class Matrix2 {
     this.m11 = cos;
 
     return this;
-  }
-
-  /**
-   * Sets this matrix to represent a scaling matrix with the given values
-   * @param {number} x the x value to scale by
-   * @param {number} y the y value to scale by
-   * @returns {Matrix2} this
-   */
-  scaling(x, y) {
-    this.zero();
-
-    this.m00 = x;
-    this.m11 = y;
-
-    return this;
-  }
-
-  /**
-   * Sets this matrix to represent a uniform scaling
-   * @param {number} scalar the value to scale by
-   * @returns {Matrix2} this
-   */
-  scalingUniform(scalar) {
-    return this.scaling(scalar, scalar);
-  }
-
-  /**
-   * Sets this matrix to represent a scaling based on the values in the vec
-   * @param {Vector2} vec2 the vector containing the values to scale by
-   * @returns {Matrix2} this
-   */
-  scalingVec(vec2) {
-    return this.scaling(vec2.x, vec2.y);
   }
 
   /**

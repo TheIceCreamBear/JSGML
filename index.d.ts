@@ -1,4 +1,4 @@
-declare class Vector2 {
+export class Vector2 {
   x: number;
   y: number;
 
@@ -49,7 +49,7 @@ declare class Vector2 {
   clone(): Vector2;
 }
 
-declare class Vector3 {
+export class Vector3 {
   x: number;
   y: number;
   z: number;
@@ -103,7 +103,7 @@ declare class Vector3 {
   clone(): Vector3;
 }
 
-declare class Vector4 {
+export class Vector4 {
   x: number;
   y: number;
   z: number;
@@ -154,7 +154,7 @@ declare class Vector4 {
   clone(): Vector3;
 }
 
-declare class Matrix2 {
+export class Matrix2 {
   m00: number;
   m01: number;
   m10: number;
@@ -198,7 +198,7 @@ declare class Matrix2 {
   lerp(other: Matrix2, t: number, dest?: Matrix2): Matrix2;
 }
 
-declare class Matrix3 {
+export class Matrix3 {
   m00: number;
   m01: number;
   m02: number;
@@ -243,7 +243,7 @@ declare class Matrix3 {
   lerp(other: Matrix3, t: number, dest?: Matrix3): Matrix3;
 }
 
-declare class Matrix4 {
+export class Matrix4 {
   m00: number;
   m01: number;
   m02: number;

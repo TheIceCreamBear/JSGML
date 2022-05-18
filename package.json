@@ -6,10 +6,12 @@
   "license": "MIT",
   "type": "module",
   "exports": "./index.js",
+  "types": "./index.d.ts",
   "files":[
     "README.md",
     "LICENSE.md",
     "index.js",
+    "index.d.ts",
     "/vec",
     "/mat"
   ],

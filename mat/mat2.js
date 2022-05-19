@@ -176,17 +176,13 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  invert(dest) {
+  invert(dest = this) {
     const det = this.determinate();
     const nm00 = this.m00 / det;
     const nm01 = this.m01 / det;
     const nm10 = this.m10 / det;
     const nm11 = this.m11 / det;
 
-    if (!dest) {
-      dest = this;
-    }
-    
     dest.m00 = nm00;
     dest.m01 = nm01;
     dest.m10 = nm10;
@@ -200,17 +196,8 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  transpose(dest) {
-    if (!dest) {
-      dest = this;
-    }
-
-    dest.m00 = this.m00;
-    dest.m10 = this.m01;
-    dest.m01 = this.m10;
-    dest.m11 = this.m11;
-
-    return dest;
+  transpose(dest = this) {
+    return dest.set(dest.m00, dest.m10, dest.m01, dest.m11);
   }
 
   /**
@@ -219,11 +206,7 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  add(other, dest) {
-    if (!dest) {
-      dest = this;
-    }
-
+  add(other, dest = this) {
     dest.m00 = this.m00 + other.m00;
     dest.m01 = this.m01 + other.m01;
     dest.m10 = this.m10 + other.m10;
@@ -238,11 +221,7 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  sub(other, dest) {
-    if (!dest) {
-      dest = this;
-    }
-
+  sub(other, dest = this) {
     dest.m00 = this.m00 - other.m00;
     dest.m01 = this.m01 - other.m01;
     dest.m10 = this.m10 - other.m10;
@@ -259,15 +238,11 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  mul(right, dest) {
+  mul(right, dest = this) {
     const nm00 = this.m00 * right.m00 + this.m10 * right.m01;
     const nm01 = this.m01 * right.m00 + this.m11 * right.m01;
     const nm10 = this.m00 * right.m10 + this.m10 * right.m11;
     const nm11 = this.m01 * right.m10 + this.m11 * right.m11;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -285,15 +260,11 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  mulLeft(left, dest) {
+  mulLeft(left, dest = this) {
     const nm00 = left.m00 * this.m00 + left.m10 * this.m01;
     const nm01 = left.m01 * this.m00 + left.m11 * this.m01;
     const nm10 = left.m00 * this.m10 + left.m10 * this.m11;
     const nm11 = left.m01 * this.m10 + left.m11 * this.m11;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -309,11 +280,7 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  mulComponentWise(other, dest) {
-    if (!dest) {
-      dest = this;
-    }
-
+  mulComponentWise(other, dest = this) {
     dest.m00 = this.m00 * other.m00;
     dest.m01 = this.m01 * other.m01;
     dest.m10 = this.m10 * other.m10;
@@ -329,15 +296,11 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  scale(x, y, dest) {
+  scale(x, y, dest = this) {
     const nm00 = this.m00 * x;
     const nm01 = this.m01 * x;
     const nm10 = this.m10 * y;
     const nm11 = this.m11 * y;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -406,7 +369,7 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  rotate(angle, dest) {
+  rotate(angle, dest = this) {
     const cos = Math.cos(angle);
     const sin = Math.sin(angle);
 
@@ -414,10 +377,6 @@ class Matrix2 {
     const nm01 = this.m01 * cos + this.m11 * sin;
     const nm10 = this.m10 * cos - this.m00 * sin;
     const nm11 = this.m11 * cos - this.m01 * sin;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -434,7 +393,7 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  rotateLeft(angle, dest) {
+  rotateLeft(angle, dest = this) {
     const cos = Math.cos(angle);
     const sin = Math.sin(angle);
 
@@ -442,10 +401,6 @@ class Matrix2 {
     const nm01 = sin * this.m00 + cos * this.m01;
     const nm10 = cos * this.m10 - sin * this.m11;
     const nm11 = sin * this.m10 + cos * this.m11;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -535,16 +490,12 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  normal(dest) {
+  normal(dest = this) {
     const scalar = 1 / this.determinate();
     const nm00 = this.m11 * scalar;
     const nm01 = this.m10 * scalar;
     const nm10 = this.m01 * scalar;
     const nm11 = this.m00 * scalar;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -561,11 +512,7 @@ class Matrix2 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  lerp(other, t, dest) {
-    if (!dest) {
-      dest = this;
-    }
-
+  lerp(other, t, dest = this) {
     dest.m00 = (other.m00 - this.m00) * t + this.m00;
     dest.m01 = (other.m01 - this.m01) * t + this.m01;
     dest.m10 = (other.m10 - this.m10) * t + this.m10;

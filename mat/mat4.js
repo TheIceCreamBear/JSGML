@@ -345,10 +345,7 @@ class Matrix4 {
   }
 
   // TODO: properties for optimization?
-  invert(dest) {
-    if (!dest) {
-      dest = this;
-    }
+  invert(dest = this) {
 
 
 
@@ -361,11 +358,7 @@ class Matrix4 {
    * @param {Matrix4} dest optional matrix to store the results in
    * @returns {Matrix4} this, or if dest is present, dest
    */
-  transpose(dest) {
-    if (!dest) {
-      dest = this;
-    }
-
+  transpose(dest = this) {
     dest.set(this.m00, this.m10, this.m20, this.m30, 
              this.m01, this.m11, this.m21, this.m31,
              this.m02, this.m12, this.m22, this.m32,

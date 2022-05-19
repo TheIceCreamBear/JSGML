@@ -252,7 +252,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  invert(dest) {
+  invert(dest = this) {
     const a = this.m00 * this.m11 - this.m01 * this.m10;
     const b = this.m02 * this.m10 - this.m00 * this.m12;
     const c = this.m01 * this.m12 - this.m02 * this.m11;
@@ -267,10 +267,6 @@ class Matrix3 {
     const nm20 = (this.m10 * this.m21 - this.m20 * this.m11) / det;
     const nm21 = (this.m20 * this.m01 - this.m00 * this.m21) / det;
     const nm22 = a / det;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -290,11 +286,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  transpose(dest) {
-    if (!dest) {
-      dest = this;
-    }
-
+  transpose(dest = this) {
     dest.set(this.m00, this.m10, this.m20, this.m01, this.m11, this.m21, this.m02, this.m12, this.m22);
 
     return dest;
@@ -306,11 +298,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  add(other, dest) {
-    if (!dest) {
-      dest = this;
-    }
-
+  add(other, dest = this) {
     dest.m00 = this.m00 + other.m00;
     dest.m01 = this.m01 + other.m01;
     dest.m02 = this.m02 + other.m02;
@@ -330,11 +318,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  sub(other, dest) {
-    if (!dest) {
-      dest = this;
-    }
-
+  sub(other, dest = this) {
     dest.m00 = this.m00 - other.m00;
     dest.m01 = this.m01 - other.m01;
     dest.m02 = this.m02 - other.m02;
@@ -356,7 +340,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  mul(right, dest) {
+  mul(right, dest = this) {
     const nm00 = this.m00 * right.m00 + this.m10 * right.m01 + this.m20 * right.m02;
     const nm01 = this.m01 * right.m00 + this.m11 * right.m01 + this.m21 * right.m02;
     const nm02 = this.m02 * right.m00 + this.m12 * right.m01 + this.m22 * right.m02;
@@ -366,10 +350,6 @@ class Matrix3 {
     const nm20 = this.m00 * right.m20 + this.m10 * right.m21 + this.m20 * right.m22;
     const nm21 = this.m01 * right.m20 + this.m11 * right.m21 + this.m21 * right.m22;
     const nm22 = this.m02 * right.m20 + this.m12 * right.m21 + this.m22 * right.m22;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -392,7 +372,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  mulLeft(left, dest) {
+  mulLeft(left, dest = this) {
     const nm00 = left.m00 * this.m00 + left.m10 * this.m01 + left.m20 * this.m02;
     const nm01 = left.m01 * this.m00 + left.m11 * this.m01 + left.m21 * this.m02;
     const nm02 = left.m02 * this.m00 + left.m12 * this.m01 + left.m22 * this.m02;
@@ -402,10 +382,6 @@ class Matrix3 {
     const nm20 = left.m00 * this.m20 + left.m10 * this.m21 + left.m20 * this.m22;
     const nm21 = left.m01 * this.m20 + left.m11 * this.m21 + left.m21 * this.m22;
     const nm22 = left.m02 * this.m20 + left.m12 * this.m21 + left.m22 * this.m22;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -426,11 +402,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  mulComponentWise(other, dest) {
-    if (!dest) {
-      dest = this;
-    }
-
+  mulComponentWise(other, dest = this) {
     dest.m00 = this.m00 * other.m00;
     dest.m01 = this.m01 * other.m01;
     dest.m02 = this.m02 * other.m02;
@@ -452,7 +424,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  scale(x, y, z, dest) {
+  scale(x, y, z, dest = this) {
     const nm00 = this.m00 * x;
     const nm01 = this.m01 * x;
     const nm02 = this.m02 * x;
@@ -462,10 +434,6 @@ class Matrix3 {
     const nm20 = this.m20 * z;
     const nm21 = this.m21 * z;
     const nm22 = this.m22 * z;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -535,8 +503,6 @@ class Matrix3 {
     return this.scaling(scalar, scalar, scalar);
   }
 
-  // TODO: rotates, allowing for axis angles and all the other jazz
-
   /**
    * Transform the given vector by this matrix
    * @param {Vector3} vec the vector to transform
@@ -603,7 +569,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  normal(dest) {
+  normal(dest = this) {
     const scalar = 1 / this.determinate();
     const nm00 = (this.m11 * this.m22 - this.m21 * this.m12) * scalar;
     const nm01 = (this.m20 * this.m12 - this.m10 * this.m22) * scalar;
@@ -614,10 +580,6 @@ class Matrix3 {
     const nm20 = (this.m01 * this.m12 - this.m02 * this.m11) * scalar;
     const nm21 = (this.m02 * this.m10 - this.m00 * this.m12) * scalar;
     const nm22 = (this.m00 * this.m11 - this.m10 * this.m01) * scalar;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -637,7 +599,7 @@ class Matrix3 {
    * @param {Matrix2} dest optional matrix to store the results in
    * @returns {Matrix2} this, or if dest is present, dest
    */
-  cofactor(dest) {
+  cofactor(dest = this) {
     const nm00 = this.m11 * this.m22 - this.m21 * this.m12;
     const nm01 = this.m20 * this.m12 - this.m10 * this.m22;
     const nm02 = this.m20 * this.m21 - this.m20 * this.m11;
@@ -647,10 +609,6 @@ class Matrix3 {
     const nm20 = this.m01 * this.m12 - this.m02 * this.m11;
     const nm21 = this.m02 * this.m10 - this.m00 * this.m12;
     const nm22 = this.m00 * this.m11 - this.m10 * this.m01;
-
-    if (!dest) {
-      dest = this;
-    }
 
     dest.m00 = nm00;
     dest.m01 = nm01;
@@ -672,11 +630,7 @@ class Matrix3 {
    * @param {Matrix3} dest optional matrix to store the results in
    * @returns {Matrix3} this, or if dest is present, dest
    */
-  lerp(other, t, dest) {
-    if (!dest) {
-      dest = this;
-    }
-
+  lerp(other, t, dest = this) {
     dest.m00 = (other.m00 - this.m00) * t + this.m00;
     dest.m01 = (other.m01 - this.m01) * t + this.m01;
     dest.m02 = (other.m02 - this.m02) * t + this.m02;
@@ -691,6 +645,8 @@ class Matrix3 {
   }
 
   // TODO: look along?
+
+  // TODO: rotates, allowing for axis angles and all the other jazz
 }
 
 export default Matrix3;

@@ -160,11 +160,11 @@ export class Matrix2 {
   m10: number;
   m11: number;
 
-  constructor(m00?: number | Float32Array | Matrix2 | Vector2, m01?: number | Vector2, m10?: number, m11?: number);
+  constructor(m00?: number | Float32Array | Matrix2 | Matrix3 | Vector2, m01?: number | Vector2, m10?: number, m11?: number);
 
   identity(): Matrix2;
   zero(): Matrix2;
-  set(m00?: number | Float32Array | Matrix2 | Vector2, m01?: number | Vector2, m10?: number, m11?: number): Matrix2;
+  set(m00?: number | Float32Array | Matrix2 | Matrix3 | Vector2, m01?: number | Vector2, m10?: number, m11?: number): Matrix2;
   getArray(): Float32Array;
 
   determinate(): number;

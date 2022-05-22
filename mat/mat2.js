@@ -1,4 +1,4 @@
-import { Vector2 } from '../index.js';
+import { Matrix3, Vector2 } from '../index.js';
 
 /**
  * Column-major 2x2 matrix. Elements are:
@@ -14,7 +14,7 @@ class Matrix2 {
    *    If it is a Matrix2, the elements of that matrix are copied to this matrix.
    *    If it is a Matrix3, the upper left corner of that matrix will be copied to this matrix.
    * If two arguments are passed in, m00 is a Vector2 with x being m00 and y being m01, and m01 is also a Vector2 with x being this.m10 and y being this.m11
-   * @param {number | Float32Array | Matrix2 | Vector2} m00 the element in the 0th col and 0th row
+   * @param {number | Float32Array | Matrix2 | Matrix3 | Vector2} m00 the element in the 0th col and 0th row
    * @param {number | Vector2} m01 the the element in the 0th col and 1st row
    * @param {number} m10 the element in the 1st col and 0th row
    * @param {number} m11 the element in the 1st col and 1st row
@@ -40,8 +40,11 @@ class Matrix2 {
           this.m01 = m00.m01;
           this.m10 = m00.m10;
           this.m11 = m00.m11;
-          // } else if (m00 instanceof ) {
-          // TODO: matrix3
+        } else if (m00 instanceof Matrix3) {
+          this.m00 = m00.m00;
+          this.m01 = m00.m01;
+          this.m10 = m00.m10;
+          this.m11 = m00.m11;
         } else {
           throw new Error('Invalid argument types');
         }
@@ -102,7 +105,7 @@ class Matrix2 {
    *    If it is a Matrix2, the elements of that matrix are copied to this matrix.
    *    If it is a Matrix3, the upper left corner of that matrix will be copied to this matrix.
    * If two arguments are passed in, m00 is a Vector2 with x being this.m00 and y being this.m01, and m01 is also a Vector2 with x being this.m10 and y being this.m11
-   * @param {number | Float32Array | Matrix2 | Vector2} m00 the element in the 0th col and 0th row
+   * @param {number | Float32Array | Matrix2 | Matrix3 | Vector2} m00 the element in the 0th col and 0th row
    * @param {number | Vector2} m01 the the element in the 0th col and 1st row
    * @param {number} m10 the element in the 1st col and 0th row
    * @param {number} m11 the element in the 1st col and 1st row
@@ -125,8 +128,11 @@ class Matrix2 {
           this.m01 = m00.m01;
           this.m10 = m00.m10;
           this.m11 = m00.m11;
-          // } else if (m00 instanceof ) {
-          // TODO: matrix3
+        } else if (m00 instanceof Matrix3) {
+          this.m00 = m00.m00;
+          this.m01 = m00.m01;
+          this.m10 = m00.m10;
+          this.m11 = m00.m11;
         } else {
           throw new Error('Invalid argument types');
         }
@@ -178,15 +184,19 @@ class Matrix2 {
    */
   invert(dest = this) {
     const det = this.determinate();
-    const nm00 = this.m00 / det;
-    const nm01 = this.m01 / det;
-    const nm10 = this.m10 / det;
-    const nm11 = this.m11 / det;
+    if (det === 0) {
+      throw new Error('Cannot invert a matrix with determinate 0');
+    }
 
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
+    const m00 = this.m11 / det;
+    const m01 = -this.m01 / det;
+    const m10 = -this.m10 / det;
+    const m11 = this.m00 / det;
+
+    dest.m00 = m00;
+    dest.m01 = m01;
+    dest.m10 = m10;
+    dest.m11 = m11;
 
     return dest;
   }
@@ -239,15 +249,15 @@ class Matrix2 {
    * @returns {Matrix2} this, or if dest is present, dest
    */
   mul(right, dest = this) {
-    const nm00 = this.m00 * right.m00 + this.m10 * right.m01;
-    const nm01 = this.m01 * right.m00 + this.m11 * right.m01;
-    const nm10 = this.m00 * right.m10 + this.m10 * right.m11;
-    const nm11 = this.m01 * right.m10 + this.m11 * right.m11;
+    const m00 = this.m00 * right.m00 + this.m10 * right.m01;
+    const m01 = this.m01 * right.m00 + this.m11 * right.m01;
+    const m10 = this.m00 * right.m10 + this.m10 * right.m11;
+    const m11 = this.m01 * right.m10 + this.m11 * right.m11;
 
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
+    dest.m00 = m00;
+    dest.m01 = m01;
+    dest.m10 = m10;
+    dest.m11 = m11;
 
     return dest;
   }
@@ -261,15 +271,15 @@ class Matrix2 {
    * @returns {Matrix2} this, or if dest is present, dest
    */
   mulLeft(left, dest = this) {
-    const nm00 = left.m00 * this.m00 + left.m10 * this.m01;
-    const nm01 = left.m01 * this.m00 + left.m11 * this.m01;
-    const nm10 = left.m00 * this.m10 + left.m10 * this.m11;
-    const nm11 = left.m01 * this.m10 + left.m11 * this.m11;
+    const m00 = left.m00 * this.m00 + left.m10 * this.m01;
+    const m01 = left.m01 * this.m00 + left.m11 * this.m01;
+    const m10 = left.m00 * this.m10 + left.m10 * this.m11;
+    const m11 = left.m01 * this.m10 + left.m11 * this.m11;
 
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
+    dest.m00 = m00;
+    dest.m01 = m01;
+    dest.m10 = m10;
+    dest.m11 = m11;
 
     return dest;
   }
@@ -297,15 +307,15 @@ class Matrix2 {
    * @returns {Matrix2} this, or if dest is present, dest
    */
   scale(x, y, dest = this) {
-    const nm00 = this.m00 * x;
-    const nm01 = this.m01 * x;
-    const nm10 = this.m10 * y;
-    const nm11 = this.m11 * y;
+    const m00 = this.m00 * x;
+    const m01 = this.m01 * x;
+    const m10 = this.m10 * y;
+    const m11 = this.m11 * y;
 
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
+    dest.m00 = m00;
+    dest.m01 = m01;
+    dest.m10 = m10;
+    dest.m11 = m11;
 
     return dest;
   }
@@ -373,15 +383,15 @@ class Matrix2 {
     const cos = Math.cos(angle);
     const sin = Math.sin(angle);
 
-    const nm00 = this.m00 * cos + this.m10 * sin;
-    const nm01 = this.m01 * cos + this.m11 * sin;
-    const nm10 = this.m10 * cos - this.m00 * sin;
-    const nm11 = this.m11 * cos - this.m01 * sin;
+    const m00 = this.m00 * cos + this.m10 * sin;
+    const m01 = this.m01 * cos + this.m11 * sin;
+    const m10 = this.m10 * cos - this.m00 * sin;
+    const m11 = this.m11 * cos - this.m01 * sin;
 
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
+    dest.m00 = m00;
+    dest.m01 = m01;
+    dest.m10 = m10;
+    dest.m11 = m11;
 
     return dest;
   }
@@ -397,15 +407,15 @@ class Matrix2 {
     const cos = Math.cos(angle);
     const sin = Math.sin(angle);
 
-    const nm00 = cos * this.m00 - sin * this.m01;
-    const nm01 = sin * this.m00 + cos * this.m01;
-    const nm10 = cos * this.m10 - sin * this.m11;
-    const nm11 = sin * this.m10 + cos * this.m11;
+    const m00 = cos * this.m00 - sin * this.m01;
+    const m01 = sin * this.m00 + cos * this.m01;
+    const m10 = cos * this.m10 - sin * this.m11;
+    const m11 = sin * this.m10 + cos * this.m11;
 
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
+    dest.m00 = m00;
+    dest.m01 = m01;
+    dest.m10 = m10;
+    dest.m11 = m11;
 
     return dest;
   }
@@ -492,15 +502,15 @@ class Matrix2 {
    */
   normal(dest = this) {
     const scalar = 1 / this.determinate();
-    const nm00 = this.m11 * scalar;
-    const nm01 = this.m10 * scalar;
-    const nm10 = this.m01 * scalar;
-    const nm11 = this.m00 * scalar;
+    const m00 = this.m11 * scalar;
+    const m01 = this.m10 * scalar;
+    const m10 = this.m01 * scalar;
+    const m11 = this.m00 * scalar;
 
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
+    dest.m00 = m00;
+    dest.m01 = m01;
+    dest.m10 = m10;
+    dest.m11 = m11;
 
     return dest;
   }

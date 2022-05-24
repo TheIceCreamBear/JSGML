@@ -1,4 +1,6 @@
-import { Vector3, Matrix2 } from '../index.js';
+import { Vector3 } from '../index.js';
+import Matrix2 from './mat2.js';
+import Matrix4 from './mat4.js';
 
 /**
  * Column-major 3x3 matrix. Elements are:
@@ -48,11 +50,15 @@ class Matrix3 {
           this.m21 = m00[7];
           this.m22 = m00[8];
         } else if (m00 instanceof Matrix2) {
-          this.zero();
           this.m00 = m00.m00;
           this.m01 = m00.m01;
+          this.m02 = 0;
           this.m10 = m00.m10;
           this.m11 = m00.m11;
+          this.m12 = 0;
+          this.m20 = 0;
+          this.m21 = 0;
+          this.m22 = 1;
         } else if (m00 instanceof Matrix3) {
           this.m00 = m00.m00;
           this.m01 = m00.m01;
@@ -63,7 +69,16 @@ class Matrix3 {
           this.m20 = m00.m20;
           this.m21 = m00.m21;
           this.m22 = m00.m22;
-          // TODO: matrix4
+        } else if (m00 instanceof Matrix4) {
+          this.m00 = m00.m00;
+          this.m01 = m00.m01;
+          this.m02 = m00.m02;
+          this.m10 = m00.m10;
+          this.m11 = m00.m11;
+          this.m12 = m00.m12;
+          this.m20 = m00.m20;
+          this.m21 = m00.m21;
+          this.m22 = m00.m22;
         } else {
           throw new Error('Invalid argument types');
         }
@@ -105,9 +120,14 @@ class Matrix3 {
    * @returns {Matrix3} this set to an identity
    */
   identity() {
-    this.zero();
     this.m00 = 1;
+    this.m01 = 0;
+    this.m02 = 0;
+    this.m10 = 0;
     this.m11 = 1;
+    this.m12 = 0;
+    this.m20 = 0;
+    this.m21 = 0;
     this.m22 = 1;
 
     return this;
@@ -173,11 +193,15 @@ class Matrix3 {
           this.m21 = m00[7];
           this.m22 = m00[8];
         } else if (m00 instanceof Matrix2) {
-          this.zero();
           this.m00 = m00.m00;
           this.m01 = m00.m01;
+          this.m02 = 0;
           this.m10 = m00.m10;
           this.m11 = m00.m11;
+          this.m12 = 0;
+          this.m20 = 0;
+          this.m21 = 0;
+          this.m22 = 1;
         } else if (m00 instanceof Matrix3) {
           this.m00 = m00.m00;
           this.m01 = m00.m01;
@@ -188,7 +212,16 @@ class Matrix3 {
           this.m20 = m00.m20;
           this.m21 = m00.m21;
           this.m22 = m00.m22;
-          // TODO: matrix4
+        } else if (m00 instanceof Matrix4) {
+          this.m00 = m00.m00;
+          this.m01 = m00.m01;
+          this.m02 = m00.m02;
+          this.m10 = m00.m10;
+          this.m11 = m00.m11;
+          this.m12 = m00.m12;
+          this.m20 = m00.m20;
+          this.m21 = m00.m21;
+          this.m22 = m00.m22;
         } else {
           throw new Error('Invalid argument types');
         }
@@ -596,8 +629,8 @@ class Matrix3 {
 
   /**
    * Calculates the cofactor matrix of this matrix, and stores it in this, or dest if present
-   * @param {Matrix2} dest optional matrix to store the results in
-   * @returns {Matrix2} this, or if dest is present, dest
+   * @param {Matrix3} dest optional matrix to store the results in
+   * @returns {Matrix3} this, or if dest is present, dest
    */
   cofactor(dest = this) {
     const nm00 = this.m11 * this.m22 - this.m21 * this.m12;

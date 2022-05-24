@@ -62,16 +62,21 @@ class Matrix4 {
           this.m32 = m00[14];
           this.m33 = m00[15];
         } else if (m00 instanceof Matrix3) {
-          this.zero();
           this.m00 = m00.m00;
           this.m01 = m00.m01;
           this.m02 = m00.m02;
+          this.m03 = 0;
           this.m10 = m00.m10;
           this.m11 = m00.m11;
           this.m12 = m00.m12;
+          this.m13 = 0;
           this.m20 = m00.m20;
           this.m21 = m00.m21;
           this.m22 = m00.m22;
+          this.m30 = 0;
+          this.m31 = 0;
+          this.m32 = 0;
+          this.m33 = 1;
         } else if (m00 instanceof Matrix4) {
           this.m00 = m00.m00;
           this.m01 = m00.m01;
@@ -144,10 +149,21 @@ class Matrix4 {
    * @returns {Matrix4} this set to an identity
    */
   identity() {
-    this.zero();
     this.m00 = 1;
+    this.m01 = 0;
+    this.m02 = 0;
+    this.m03 = 0;
+    this.m10 = 0;
     this.m11 = 1;
+    this.m12 = 0;
+    this.m13 = 0;
+    this.m20 = 0;
+    this.m21 = 0;
     this.m22 = 1;
+    this.m23 = 0;
+    this.m30 = 0;
+    this.m31 = 0;
+    this.m32 = 0;
     this.m33 = 1;
     
     return this;
@@ -232,16 +248,21 @@ class Matrix4 {
           this.m32 = m00[14];
           this.m33 = m00[15];
         } else if (m00 instanceof Matrix3) {
-          this.zero();
           this.m00 = m00.m00;
           this.m01 = m00.m01;
           this.m02 = m00.m02;
+          this.m03 = 0;
           this.m10 = m00.m10;
           this.m11 = m00.m11;
           this.m12 = m00.m12;
+          this.m13 = 0;
           this.m20 = m00.m20;
           this.m21 = m00.m21;
           this.m22 = m00.m22;
+          this.m30 = 0;
+          this.m31 = 0;
+          this.m32 = 0;
+          this.m33 = 1;
         } else if (m00 instanceof Matrix4) {
           this.m00 = m00.m00;
           this.m01 = m00.m01;

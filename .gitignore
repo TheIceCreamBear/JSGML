@@ -9,6 +9,3 @@ lerna-debug.log*
 
 # Node modules
 node_modules/
-
-# VS Code Settings
-.vscode/

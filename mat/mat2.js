@@ -170,47 +170,6 @@ class Matrix2 {
   }
 
   /**
-   * Calculates the determinate of this matrix
-   * @returns {number} the determinate of this matrix
-   */
-  determinate() {
-    return this.m00 * this.m11 - this.m01 * this.m10;
-  }
-
-  /**
-   * Inverts this matrix, and optionally stores it in dest
-   * @param {Matrix2} dest optional matrix to store the results in
-   * @returns {Matrix2} this, or if dest is present, dest
-   */
-  invert(dest = this) {
-    const det = this.determinate();
-    if (det === 0) {
-      throw new Error('Cannot invert a matrix with determinate 0');
-    }
-
-    const m00 = this.m11 / det;
-    const m01 = -this.m01 / det;
-    const m10 = -this.m10 / det;
-    const m11 = this.m00 / det;
-
-    dest.m00 = m00;
-    dest.m01 = m01;
-    dest.m10 = m10;
-    dest.m11 = m11;
-
-    return dest;
-  }
-
-  /**
-   * Calculates the transpose of this matrix, stores the result in dest if present
-   * @param {Matrix2} dest optional matrix to store the results in
-   * @returns {Matrix2} this, or if dest is present, dest
-   */
-  transpose(dest = this) {
-    return dest.set(dest.m00, dest.m10, dest.m01, dest.m11);
-  }
-
-  /**
    * Adds the other matrix to this matrix, stores the result in dest if present
    * @param {Matrix2} other the matrix to add to this matrix
    * @param {Matrix2} dest optional matrix to store the results in
@@ -493,6 +452,47 @@ class Matrix2 {
     const ny = this.m10 * y + this.m11 * y;
 
     return dest.set(nx, ny);
+  }
+
+  /**
+   * Calculates the determinate of this matrix
+   * @returns {number} the determinate of this matrix
+   */
+  determinate() {
+    return this.m00 * this.m11 - this.m01 * this.m10;
+  }
+
+  /**
+   * Inverts this matrix, and optionally stores it in dest
+   * @param {Matrix2} dest optional matrix to store the results in
+   * @returns {Matrix2} this, or if dest is present, dest
+   */
+  invert(dest = this) {
+    const det = this.determinate();
+    if (det === 0) {
+      throw new Error('Cannot invert a matrix with determinate 0');
+    }
+
+    const m00 = this.m11 / det;
+    const m01 = -this.m01 / det;
+    const m10 = -this.m10 / det;
+    const m11 = this.m00 / det;
+
+    dest.m00 = m00;
+    dest.m01 = m01;
+    dest.m10 = m10;
+    dest.m11 = m11;
+
+    return dest;
+  }
+
+  /**
+   * Calculates the transpose of this matrix, stores the result in dest if present
+   * @param {Matrix2} dest optional matrix to store the results in
+   * @returns {Matrix2} this, or if dest is present, dest
+   */
+  transpose(dest = this) {
+    return dest.set(dest.m00, dest.m10, dest.m01, dest.m11);
   }
 
   /**

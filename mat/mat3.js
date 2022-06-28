@@ -269,65 +269,6 @@ class Matrix3 {
   }
 
   /**
-   * Calculates the determinate of this matrix using sub matrices, where a row (or col) of the
-   * matrix is selected and the elements of that row (or col) become coefficients to sub matrix
-   * determinates. For this implementation, the second row was selected
-   * @returns {number} the determinate of this matrix
-   */
-  determinate() {
-    return (
-      (this.m10 * this.m21 - this.m20 * this.m11) * this.m02 -
-      (this.m00 * this.m21 - this.m20 * this.m01) * this.m12 +
-      (this.m00 * this.m11 - this.m10 * this.m01) * this.m22
-    );
-  }
-
-  /**
-   * Inverts this matrix, and optionally stores it in dest
-   * @param {Matrix3} dest optional matrix to store the results in
-   * @returns {Matrix3} this, or if dest is present, dest
-   */
-  invert(dest = this) {
-    const a = this.m00 * this.m11 - this.m01 * this.m10;
-    const b = this.m02 * this.m10 - this.m00 * this.m12;
-    const c = this.m01 * this.m12 - this.m02 * this.m11;
-    const det = a * this.m22 + b * this.m21 + c * this.m20;
-
-    const nm00 = (this.m11 * this.m22 - this.m21 * this.m12) / det;
-    const nm01 = (this.m21 * this.m02 - this.m01 * this.m22) / det;
-    const nm02 = c / det;
-    const nm10 = (this.m20 * this.m12 - this.m10 * this.m22) / det;
-    const nm11 = (this.m00 * this.m22 - this.m20 * this.m02) / det;
-    const nm12 = b / det;
-    const nm20 = (this.m10 * this.m21 - this.m20 * this.m11) / det;
-    const nm21 = (this.m20 * this.m01 - this.m00 * this.m21) / det;
-    const nm22 = a / det;
-
-    dest.m00 = nm00;
-    dest.m01 = nm01;
-    dest.m02 = nm02;
-    dest.m10 = nm10;
-    dest.m11 = nm11;
-    dest.m12 = nm12;
-    dest.m20 = nm20;
-    dest.m21 = nm21;
-    dest.m22 = nm22;
-
-    return dest;
-  }
-
-  /**
-   * Calculates the transpose of this matrix, stores the result in dest if present
-   * @param {Matrix3} dest optional matrix to store the results in
-   * @returns {Matrix3} this, or if dest is present, dest
-   */
-  transpose(dest = this) {
-    dest.set(this.m00, this.m10, this.m20, this.m01, this.m11, this.m21, this.m02, this.m12, this.m22);
-
-    return dest;
-  }
-
-  /**
    * Adds the other matrix to this matrix, stores the result in dest if present
    * @param {Matrix3} other the matrix to add to this matrix
    * @param {Matrix3} dest optional matrix to store the results in
@@ -597,8 +538,66 @@ class Matrix3 {
 
     dest.set(nx, ny, nz);
   }
-  
 
+  /**
+   * Calculates the determinate of this matrix using sub matrices, where a row (or col) of the
+   * matrix is selected and the elements of that row (or col) become coefficients to sub matrix
+   * determinates. For this implementation, the second row was selected
+   * @returns {number} the determinate of this matrix
+   */
+  determinate() {
+    return (
+      (this.m10 * this.m21 - this.m20 * this.m11) * this.m02 -
+      (this.m00 * this.m21 - this.m20 * this.m01) * this.m12 +
+      (this.m00 * this.m11 - this.m10 * this.m01) * this.m22
+    );
+  }
+
+  /**
+   * Inverts this matrix, and optionally stores it in dest
+   * @param {Matrix3} dest optional matrix to store the results in
+   * @returns {Matrix3} this, or if dest is present, dest
+   */
+  invert(dest = this) {
+    const a = this.m00 * this.m11 - this.m01 * this.m10;
+    const b = this.m02 * this.m10 - this.m00 * this.m12;
+    const c = this.m01 * this.m12 - this.m02 * this.m11;
+    const det = a * this.m22 + b * this.m21 + c * this.m20;
+
+    const nm00 = (this.m11 * this.m22 - this.m21 * this.m12) / det;
+    const nm01 = (this.m21 * this.m02 - this.m01 * this.m22) / det;
+    const nm02 = c / det;
+    const nm10 = (this.m20 * this.m12 - this.m10 * this.m22) / det;
+    const nm11 = (this.m00 * this.m22 - this.m20 * this.m02) / det;
+    const nm12 = b / det;
+    const nm20 = (this.m10 * this.m21 - this.m20 * this.m11) / det;
+    const nm21 = (this.m20 * this.m01 - this.m00 * this.m21) / det;
+    const nm22 = a / det;
+
+    dest.m00 = nm00;
+    dest.m01 = nm01;
+    dest.m02 = nm02;
+    dest.m10 = nm10;
+    dest.m11 = nm11;
+    dest.m12 = nm12;
+    dest.m20 = nm20;
+    dest.m21 = nm21;
+    dest.m22 = nm22;
+
+    return dest;
+  }
+
+  /**
+   * Calculates the transpose of this matrix, stores the result in dest if present
+   * @param {Matrix3} dest optional matrix to store the results in
+   * @returns {Matrix3} this, or if dest is present, dest
+   */
+  transpose(dest = this) {
+    dest.set(this.m00, this.m10, this.m20, this.m01, this.m11, this.m21, this.m02, this.m12, this.m22);
+
+    return dest;
+  }
+  
   /**
    * Calculates the normal matrix of this matrix, and stores it in this, or dest if present
    * @param {Matrix3} dest optional matrix to store the results in

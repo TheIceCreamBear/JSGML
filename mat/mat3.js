@@ -269,14 +269,16 @@ class Matrix3 {
   }
 
   /**
-   * Calculates the determinate of this matrix
+   * Calculates the determinate of this matrix using sub matrices, where a row (or col) of the
+   * matrix is selected and the elements of that row (or col) become coefficients to sub matrix
+   * determinates. For this implementation, the second row was selected
    * @returns {number} the determinate of this matrix
    */
   determinate() {
     return (
-      (this.m00 * this.m11 - this.m01 * this.m10) * this.m22 -
-      (this.m02 * this.m10 - this.m00 * this.m12) * this.m21 +
-      (this.m01 * this.m12 - this.m02 * this.m11) * this.m20
+      (this.m10 * this.m21 - this.m20 * this.m11) * this.m02 -
+      (this.m00 * this.m21 - this.m20 * this.m01) * this.m12 +
+      (this.m00 * this.m11 - this.m10 * this.m01) * this.m22
     );
   }
 

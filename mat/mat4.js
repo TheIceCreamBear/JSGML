@@ -337,58 +337,6 @@ class Matrix4 {
   getArray() {
     return [this.m00, this.m01, this.m02, this.m03, this.m10, this.m11, this.m12, this.m13, this.m20, this.m21, this.m22, this.m23, this.m30, this.m31, this.m32, this.m33];
   }
-
-  /**
-   * Calculates the determinate of this matrix
-   * @returns {number} the determinate of this matrix
-   */
-  determinate() {
-    return (
-      ((this.m00 * this.m11 - this.m01 * this.m10) * (this.m22 * this.m33 - this.m23 * this.m32)) + 
-      ((this.m02 * this.m10 - this.m00 * this.m12) * (this.m21 * this.m33 - this.m23 * this.m31)) + 
-      ((this.m00 * this.m13 - this.m03 * this.m10) * (this.m21 * this.m32 - this.m22 * this.m31)) + 
-      ((this.m01 * this.m12 - this.m02 * this.m11) * (this.m20 * this.m33 - this.m23 * this.m30)) + 
-      ((this.m03 * this.m11 - this.m01 * this.m13) * (this.m20 * this.m32 - this.m22 * this.m30)) + 
-      ((this.m02 * this.m13 - this.m03 * this.m12) * (this.m20 * this.m31 - this.m21 * this.m30))
-    )
-  }
-
-  /**
-   * 
-   * @returns {number} the determinate of the 3x3 of this matrix
-   */
-  determinate3x3() {
-    return (
-      (this.m00 * this.m11 - this.m01 * this.m10) * this.m22 +
-      (this.m02 * this.m10 - this.m00 * this.m12) * this.m21 +
-      (this.m01 * this.m12 - this.m02 * this.m11) * this.m20
-    );
-  }
-
-  // TODO: properties for optimization?
-  invert(dest = this) {
-
-
-
-
-    return dest;
-  }
-
-  /**
-   * Calculates the transpose of this matrix, stores the result in dest if present
-   * @param {Matrix4} dest optional matrix to store the results in
-   * @returns {Matrix4} this, or if dest is present, dest
-   */
-  transpose(dest = this) {
-    dest.set(this.m00, this.m10, this.m20, this.m30, 
-             this.m01, this.m11, this.m21, this.m31,
-             this.m02, this.m12, this.m22, this.m32,
-             this.m03, this.m13, this.m23, this.m33);
-
-    return dest;
-  }
-
-
 }
 
 export default Matrix4;

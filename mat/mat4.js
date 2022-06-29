@@ -165,7 +165,7 @@ class Matrix4 {
     this.m31 = 0;
     this.m32 = 0;
     this.m33 = 1;
-    
+
     return this;
   }
 
@@ -190,7 +190,7 @@ class Matrix4 {
     this.m31 = 0;
     this.m32 = 0;
     this.m33 = 0;
-    
+
     return this;
   }
 
@@ -219,7 +219,7 @@ class Matrix4 {
    * @param {number} m32 the element in the 3nd col and 2nd row
    * @param {number} m33 the element in the 3nd col and 3rd row
    */
-   set(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
+  set(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
     switch (arguments.length) {
       // nothing, use the identity
       case 0:
@@ -336,6 +336,158 @@ class Matrix4 {
    */
   getArray() {
     return [this.m00, this.m01, this.m02, this.m03, this.m10, this.m11, this.m12, this.m13, this.m20, this.m21, this.m22, this.m23, this.m30, this.m31, this.m32, this.m33];
+  }
+
+  /**
+   * Adds the other matrix to this matrix, stores the result in dest if present
+   * @param {Matrix4} other the matrix to add to this matrix
+   * @param {Matrix4} dest optional matrix to store the results in
+   * @returns {Matrix4} this, or if dest is present, dest
+   */
+  add(other, dest = this) {
+    dest.m00 = this.m00 + other.m00;
+    dest.m01 = this.m01 + other.m01;
+    dest.m02 = this.m02 + other.m02;
+    dest.m03 = this.m03 + other.m03;
+    dest.m10 = this.m10 + other.m10;
+    dest.m11 = this.m11 + other.m11;
+    dest.m12 = this.m12 + other.m12;
+    dest.m13 = this.m13 + other.m13;
+    dest.m20 = this.m20 + other.m20;
+    dest.m21 = this.m21 + other.m21;
+    dest.m22 = this.m22 + other.m22;
+    dest.m23 = this.m23 + other.m23;
+    dest.m30 = this.m30 + other.m30;
+    dest.m31 = this.m31 + other.m31;
+    dest.m32 = this.m32 + other.m32;
+    dest.m33 = this.m33 + other.m33;
+
+    return dest;
+  }
+
+  /**
+   * Subtracts the other matrix to this matrix, stores the result in dest if present
+   * @param {Matrix4} other the matrix to subtract to this matrix
+   * @param {Matrix4} dest optional matrix to store the results in
+   * @returns {Matrix4} this, or if dest is present, dest
+   */
+  sub(other, dest = this) {
+    dest.m00 = this.m00 - other.m00;
+    dest.m01 = this.m01 - other.m01;
+    dest.m02 = this.m02 - other.m02;
+    dest.m03 = this.m03 - other.m03;
+    dest.m10 = this.m10 - other.m10;
+    dest.m11 = this.m11 - other.m11;
+    dest.m12 = this.m12 - other.m12;
+    dest.m13 = this.m13 - other.m13;
+    dest.m20 = this.m20 - other.m20;
+    dest.m21 = this.m21 - other.m21;
+    dest.m22 = this.m22 - other.m22;
+    dest.m23 = this.m23 - other.m23;
+    dest.m30 = this.m30 - other.m30;
+    dest.m31 = this.m31 - other.m31;
+    dest.m32 = this.m32 - other.m32;
+    dest.m33 = this.m33 - other.m33;
+
+    return dest;
+  }
+
+  // mul
+
+  // mulLeft
+
+  /**
+   * Multiplies this Matrix's components by the other's components, stores the result in dest if present
+   * @param {Matrix4} other the matrix to multiply on the left of this
+   * @param {Matrix4} dest optional matrix to store the results in
+   * @returns {Matrix4} this, or if dest is present, dest
+   */
+  mulComponentWise(other, dest = this) {
+    dest.m00 = this.m00 * other.m00;
+    dest.m01 = this.m01 * other.m01;
+    dest.m02 = this.m02 * other.m02;
+    dest.m03 = this.m03 * other.m03;
+    dest.m10 = this.m10 * other.m10;
+    dest.m11 = this.m11 * other.m11;
+    dest.m12 = this.m12 * other.m12;
+    dest.m13 = this.m13 * other.m13;
+    dest.m20 = this.m20 * other.m20;
+    dest.m21 = this.m21 * other.m21;
+    dest.m22 = this.m22 * other.m22;
+    dest.m23 = this.m23 * other.m23;
+    dest.m30 = this.m30 * other.m30;
+    dest.m31 = this.m31 * other.m31;
+    dest.m32 = this.m32 * other.m32;
+    dest.m33 = this.m33 * other.m33;
+
+    return dest;
+  }
+
+  // ============================================================================
+
+  // scale
+
+  // scaling
+
+  // ============================================================================
+
+  // rotate
+
+  // rotation
+
+  // ============================================================================
+
+  // transform
+
+  // transformation
+
+  // ============================================================================
+
+  // determinate
+
+  // invert
+
+  /**
+   * Calculates the transpose of this matrix, stores the result in dest if present
+   * @param {Matrix4} dest optional matrix to store the results in
+   * @returns {Matrix4} this, or if dest is present, dest
+   */
+  transpose(dest = this) {
+    dest.set(this.m00, this.m10, this.m20, this.m30, this.m01, this.m11, this.m21, this.m31, this.m02, this.m12, this.m22, this.m32, this.m03, this.m13, this.m23, this.m33);
+
+    return dest;
+  }
+
+  // normal
+
+  // cofactor
+
+  /**
+   * Calculates the linter interpolation between this matrix and the other
+   * @param {Matrix4} other the other matrix to interpolate between
+   * @param {number} t the progress of the lerp
+   * @param {Matrix4} dest optional matrix to store the results in
+   * @returns {Matrix4} this, or if dest is present, dest
+   */
+  lerp(other, t, dest = this) {
+    dest.m00 = (other.m00 - this.m00) * t + this.m00;
+    dest.m01 = (other.m01 - this.m01) * t + this.m01;
+    dest.m02 = (other.m02 - this.m02) * t + this.m02;
+    dest.m03 = (other.m03 - this.m03) * t + this.m03;
+    dest.m10 = (other.m10 - this.m10) * t + this.m10;
+    dest.m11 = (other.m11 - this.m11) * t + this.m11;
+    dest.m12 = (other.m12 - this.m12) * t + this.m12;
+    dest.m13 = (other.m13 - this.m13) * t + this.m13;
+    dest.m20 = (other.m20 - this.m20) * t + this.m20;
+    dest.m21 = (other.m21 - this.m21) * t + this.m21;
+    dest.m22 = (other.m22 - this.m22) * t + this.m22;
+    dest.m23 = (other.m23 - this.m23) * t + this.m23;
+    dest.m30 = (other.m30 - this.m30) * t + this.m30;
+    dest.m31 = (other.m31 - this.m31) * t + this.m31;
+    dest.m32 = (other.m32 - this.m32) * t + this.m32;
+    dest.m33 = (other.m33 - this.m33) * t + this.m33;
+
+    return dest;
   }
 }
 
